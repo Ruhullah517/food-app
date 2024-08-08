@@ -16,6 +16,7 @@ import Vector from '../../assets/Icons/Vector.svg';
 import Delivery from '../../assets/Icons/DeliverBoyIcon.svg';
 import CardIcon from '../../assets/Icons/Card icon.svg';
 import { useFonts } from 'expo-font';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -48,18 +49,31 @@ const constants = [
 ];
 const OnBoarding = () => {
     const [loaded] = useFonts({
-        LeagueSpartan: require('../../assets/fonts/League Spartan Medium.ttf'),
-        Inter: require('../../assets/fonts/Inter 28pt Black.ttf')
+        LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
+        LeagueSpartanBold: require('../../assets/fonts/League Spartan Bold.ttf'),
+        LeagueSpartanLight: require('../../assets/fonts/League Spartan Light.ttf'),
+        LeagueSpartanSemiBold: require('../../assets/fonts/League Spartan SemiBold.ttf'),
+        LeagueSpartanblack: require('../../assets/fonts/League Spartan Black.ttf'),
+        LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
+        InterBlack: require('../../assets/fonts/Inter 24pt Black.ttf')
     })
 
 
-
+    const navigation = useNavigation();
     const scrollX = useRef(new Animated.Value(0)).current;
     const flatListRef = useRef(null);
 
     const handleNext = () => {
-        const nextIndex = Math.min(Math.round(scrollX._value / width) + 1, constants.length - 1);
-        flatListRef.current.scrollToIndex({ index: nextIndex, animated: true });
+        const currentIndex = Math.round(scrollX._value / width);
+    
+        if (currentIndex < constants.length - 1) {
+            // If not the last page, scroll to the next page
+            const nextIndex = currentIndex + 1;
+            flatListRef.current.scrollToIndex({ index: nextIndex, animated: true });
+        } else {
+            // If it's the last page, navigate to the login page
+            navigation.navigate('Login'); 
+        }
     };
 
     const renderFooter = () => (
@@ -172,13 +186,16 @@ const styles = StyleSheet.create({
         top: 20,
         right: 20,
         padding: 10,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent:'center',
+        alignItems:"center"
 
 
     },
     skipText: {
         color: '#E95322',
         fontSize: 16,
+        fontFamily:'LeagueSpartanSemiBold'
     },
     card: {
         width: width,
@@ -186,7 +203,8 @@ const styles = StyleSheet.create({
         marginTop: -30,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        padding: 10,
+        paddingVertical:10,
+        paddingHorizontal:30,
         backgroundColor: '#fff',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -207,14 +225,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginVertical: 10,
         color: '#E95322',
-        fontFamily: 'Inter'
+        fontFamily: 'InterBlack'
     },
     description: {
         textAlign: 'center',
         color: '#391713',
         marginBottom: 20,
-        fontFamily: 'LeagueSpartan',
-        fontSize:14
+        fontFamily: 'LeagueSpartanMedium',
+        fontSize: 14,
+        lineHeight:14
 
     },
     pagination: {
@@ -249,9 +268,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#E95322',
         marginTop: 10,
         width: width * 0.4,
-        fontSize:17,
-        fontFamily:"LeagueSpartan",
-        fontWeight:500
+        fontSize: 17,
+        fontFamily: "LeagueSpartanMedium",
+        fontWeight: 500
     },
 });
 

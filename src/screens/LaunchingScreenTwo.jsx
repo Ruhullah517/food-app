@@ -8,7 +8,13 @@ import { useFonts } from 'expo-font';
 const LaunchingTwo = ({ navigation }) => {
 
     const [loaded] = useFonts({
-        LeagueSpartan: require('../../assets/fonts/League Spartan Medium.ttf')
+        LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
+        LeagueSpartanBold: require('../../assets/fonts/League Spartan Bold.ttf'),
+        LeagueSpartanLight: require('../../assets/fonts/League Spartan Light.ttf'),
+        LeagueSpartanSemiBold: require('../../assets/fonts/League Spartan SemiBold.ttf'),
+        LeagueSpartanblack: require('../../assets/fonts/League Spartan Black.ttf'),
+        LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
+
     })
     if (!loaded) {
         return null;
@@ -21,10 +27,10 @@ const LaunchingTwo = ({ navigation }) => {
                 <Text style={styles.subtitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</Text>
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OnBoarding')}>
                     <Text style={styles.buttonText}>Log In</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('SignUp')}>
+                <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate('OnBoarding')}>
                     <Text style={styles.buttonText}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
@@ -46,11 +52,11 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 14,
-        color: '#FFFFFF',
+        color: '#F8F8F8',
         textAlign: 'center',
         marginHorizontal: 20,
         marginTop: 20,
-        fontFamily:'LeagueSpartan'
+        fontFamily:'LeagueSpartanMedium'
     },
     buttonContainer: {
         width: '60%',
@@ -71,10 +77,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonText: {
-        color: '#FF6F00',
+        color: '#E95322',
         fontSize: 24,
-        fontWeight: '500',
-        fontFamily:'LeagueSpartan'
+        fontFamily:'LeagueSpartanMedium'
 
     },
 

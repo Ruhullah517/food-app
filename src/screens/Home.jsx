@@ -15,7 +15,8 @@ import { useFonts } from 'expo-font';
 import { Card } from 'react-native-paper';
 import Arrow from 'react-native-vector-icons/MaterialIcons';
 import BottomNav from '../components/BottomNav';
-
+import StarIcon from '../../assets/Icons/StarIcon.svg'
+import { useNavigation } from '@react-navigation/native';
 
 
 const { width, height } = Dimensions.get('window');
@@ -45,20 +46,25 @@ const data = [
 const recommend = [
     {
         image: require("../../assets/burger.png"),
-        rating: '5.0 ⭐',
+        rating: '5.0',
+        StarIcon: <StarIcon/>,
         price: '$10.00',
         alt: 'Delicious burger',
-        heart: <Heart width={20} height={20} />
+        heart: <Heart width={16} height={16} />
     },
     {
         image: require("../../assets/burger2.png"),
-        rating: '5.0 ⭐',
+        rating: '5.0',
+        StarIcon: <StarIcon/>,
         price: '$25.00',
         alt: 'Fresh spring rolls',
+        heart: <Heart width={16} height={16} />
     }
 ];
 
 const HomePage = () => {
+const navigation = useNavigation();
+
     const [currentPage, setCurrentPage] = useState(0);
 
     const handleScroll = (event) => {
@@ -68,7 +74,13 @@ const HomePage = () => {
     };
 
     const [loaded] = useFonts({
-        LeagueSpartan: require('../../assets/fonts/League Spartan Medium.ttf')
+        LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
+        LeagueSpartanBold: require('../../assets/fonts/League Spartan Bold.ttf'),
+        LeagueSpartanLight: require('../../assets/fonts/League Spartan Light.ttf'),
+        LeagueSpartanSemiBold: require('../../assets/fonts/League Spartan SemiBold.ttf'),
+        LeagueSpartanblack: require('../../assets/fonts/League Spartan Black.ttf'),
+        LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
+
     })
     if (!loaded) {
         return null;
@@ -98,7 +110,7 @@ const HomePage = () => {
                                 <NotifyIcon width={16} height={16} style={styles.icon} />
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity  onPress={() => navigation.openDrawer()}>
                             <View style={styles.iconBack}>
                                 <ProfileIcon width={16} height={16} style={styles.icon} />
                             </View>
@@ -217,8 +229,9 @@ const HomePage = () => {
                                     <Image source={item.image} style={styles.reImage} alt={item.alt} />
                                     <View style={styles.reRatingContainer}>
                                         <View style={styles.reRating}>
-                                            <Text style={styles.reRatingText}>{item.rating}</Text>
+                                            <Text style={styles.reRatingText}>{item.rating} {item.StarIcon}</Text>
                                         </View>
+                                        
                                         <Text style={styles.reRatingText}>{item.heart}</Text>
                                     </View>
                                     <View style={styles.rePriceTag}>
@@ -280,14 +293,14 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: "700",
         marginTop: 20,
-        fontFamily: 'LeagueSpartan',
+        fontFamily: 'LeagueSpartanBold',
         color: '#F8F8F8',
         lineHeight: 28.6
     },
     subtitle: {
         fontSize: 13,
         color: '#E95322',
-        fontFamily: 'LeagueSpartan',
+        fontFamily: 'LeagueSpartanMedium',
         fontWeight: '500',
         lineHeight: 11.96
     },
@@ -304,7 +317,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.8,
         shadowRadius: 2,
         elevation: 5,
-        bottom: 0
+        bottom: 0,
+        paddingBottom:30
     }
     ,
     categories: {
@@ -318,7 +332,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     categoryName: {
-        fontFamily: 'LeagueSpartan',
+        fontFamily: 'LeagueSpartanRegular',
         fontWeight: '400',
         fontSize: 12
     }
@@ -340,12 +354,12 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 20,
         fontWeight: '500',
-        fontFamily: 'LeagueSpartan',
+        fontFamily: 'LeagueSpartanMedium',
     },
     viewAll: {
         fontSize: 12,
         color: '#E95322',
-        fontFamily: 'LeagueSpartan',
+        fontFamily: 'LeagueSpartanSemiBold',
         fontWeight: '600',
 
     },
@@ -376,7 +390,7 @@ const styles = StyleSheet.create({
     priceText: {
         color: '#FFF',
         fontWeight: '400',
-        fontFamily: 'LeagueSpartan',
+        fontFamily: 'LeagueSpartanRegular',
         fontSize: 12,
     },
     discountContainer: {
@@ -414,14 +428,14 @@ const styles = StyleSheet.create({
         height: 30,
         fontSize: 16,
         color: '#F8F8F8',
-        fontFamily: 'LeagueSpartan',
+        fontFamily: 'LeagueSpartanRegular',
         fontWeight: "400",
         lineHeight: 14.72,
         textAlign: 'center'
     },
     discount: {
         width: 127,
-        fontFamily: 'LeagueSpartan',
+        fontFamily: 'LeagueSpartanBold',
         fontWeight: "700",
         fontSize: 32,
         color: '#F8F8F8',
@@ -472,7 +486,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '500',
         color: '#391713',
-        fontFamily: "LeagueSpartan"
+        fontFamily: "LeagueSpartanMedium"
     },
     reGrid: {
         marginTop: 16,
@@ -498,17 +512,23 @@ const styles = StyleSheet.create({
         top: 10,
         left: 12,
         flexDirection: 'row',
-        columnGap: 5
+        columnGap: 5,
+        justifyContent:'center',
+        alignItems:'center',
+        
     },
     reRating: {
         backgroundColor: '#FFFFFF',
-        borderRadius: 50,
-        paddingVertical: 0,
-        paddingHorizontal: 3,
+        borderRadius: 30,
+        paddingBottom: 1,
+        paddingHorizontal: 2,
+        paddingTop:0,
+        justifyContent:'center',
     },
     reRatingText: {
         color: '#391713',
-        fontFamily: "LeagueSpartan"// Adjust color as needed
+        fontSize:12,
+        fontFamily: "LeagueSpartanRegular"// Adjust color as needed
     },
     rePriceTag: {
         position: 'absolute',
@@ -524,7 +544,7 @@ const styles = StyleSheet.create({
     },
     rePriceText: {
         color: '#fff',
-        fontFamily: "LeagueSpartan"
+        fontFamily: "LeagueSpartanRegular"
     },
 });
 
