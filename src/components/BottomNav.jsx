@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import HomeIcon from "../../assets/Icons/HomeIcon.svg";
-import HeartIcon from "../../assets/Icons/heartIcon.svg";
+import HeartIcon from "../../assets/Icons/heartIconWhite.svg";
 import DishIcon from "../../assets/Icons/DishIcon.svg";
 import OrderIcon from "../../assets/Icons/orderBoard.svg";
 import HeadPhoneIcon from "../../assets/Icons/headPhoneIcon.svg";

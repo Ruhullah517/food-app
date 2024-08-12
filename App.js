@@ -1,43 +1,85 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View ,Dimensions} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Drawer } from 'react-native-drawer-layout';
 import OnBoarding from './src/screens/OnBoarding';
 import LaunchingTwo from './src/screens/LaunchingScreenTwo';
 import HomePage from './src/screens/Home';
 import LoginPage from './src/screens/LoginPage';
-import SetPassword from './src/screens/SetPassword'
+import SetPassword from './src/screens/SetPassword';
 import SignupPage from './src/screens/SignupPage';
-import CustomDrawerContent from './src/components/ProfileDrawer'; // Your custom drawer component
+import { ProfileDrawerContext, NotificationsDrawerContext, CartDrawerContext } from './src/DrawerContext';
+import ProfileDrawer from './src/components/ProfileDrawer';
+import CartDrawer from './src/components/CartDrawer';
+import NotificationDrawer from './src/components/NotificationDrawer';
+import MyOrders from './src/screens/MyOrders';
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
+const { width, height } = Dimensions.get('window');
+
 
 function HomeDrawer() {
+  const [profileDrawerOpen, setProfileDrawerOpen] = useState(false);
+  const [notificationsDrawerOpen, setNotificationsDrawerOpen] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+
+  const profileDrawerValue = useMemo(() => ({
+    openProfileDrawer: () => setProfileDrawerOpen(true),
+    closeProfileDrawer: () => setProfileDrawerOpen(false),
+  }), []);
+
+  const notificationsDrawerValue = useMemo(() => ({
+    openNotificationsDrawer: () => setNotificationsDrawerOpen(true),
+    closeNotificationsDrawer: () => setNotificationsDrawerOpen(false),
+  }), []);
+
+  const cartDrawerValue = useMemo(() => ({
+    openCartDrawer: () => setCartDrawerOpen(true),
+    closeCartDrawer: () => setCartDrawerOpen(false),
+  }), []);
+
   return (
-    <Drawer.Navigator
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-      screenOptions={{
-        drawerPosition: "right",
-        drawerStyle: {
-          width: '83%',
-          backgroundColor: 'transparent',
-           // Covers 80% of the screen
-        },
-        overlayColor: 'rgba(0.3, 0.3, 0.3, 0.3)', // Keeps the remaining 20% of the home screen visible
-        sceneContainerStyle: {
-          backgroundColor: 'rgba(0, 0, 0, 0.3)', // Optional: darkens the background slightly
-        },
-      }}
-    >
-      <Drawer.Screen
-        name="HomePage"
-        component={HomePage}
-        options={{ headerShown: false }}
-      />
-    </Drawer.Navigator>
+    <ProfileDrawerContext.Provider value={profileDrawerValue}>
+      <NotificationsDrawerContext.Provider value={notificationsDrawerValue}>
+        <CartDrawerContext.Provider value={cartDrawerValue}>
+          <Drawer
+            open={profileDrawerOpen}
+            onOpen={() => setProfileDrawerOpen(true)}
+            onClose={() => setProfileDrawerOpen(false)}
+            drawerPosition="right" // Ensuring the drawer opens from the right
+            renderDrawerContent={() => <ProfileDrawer />}
+            drawerStyle={{ backgroundColor: 'transparent',width:width*0.83 }}
+          >
+            <Drawer
+              open={notificationsDrawerOpen}
+              onOpen={() => setNotificationsDrawerOpen(true)}
+              onClose={() => setNotificationsDrawerOpen(false)}
+              drawerPosition="right" // Ensuring the drawer opens from the right
+              renderDrawerContent={() => <NotificationDrawer />}
+              drawerStyle={{ backgroundColor: 'transparent',width:width*0.83  }}
+
+            >
+              <Drawer
+                open={cartDrawerOpen}
+                onOpen={() => setCartDrawerOpen(true)}
+                onClose={() => setCartDrawerOpen(false)}
+                drawerPosition="right" // Ensuring the drawer opens from the right
+                renderDrawerContent={() => <CartDrawer />}
+                gestureHandler={false}
+                drawerStyle={{ backgroundColor: 'transparent',width:width*0.83  }}
+
+              >
+                <View style={{ flex: 1 }}>
+                  <HomePage />
+                </View>
+              </Drawer>
+            </Drawer>
+          </Drawer>
+        </CartDrawerContext.Provider>
+      </NotificationsDrawerContext.Provider>
+    </ProfileDrawerContext.Provider>
   );
 }
 
@@ -75,6 +117,11 @@ export default function App() {
           <Stack.Screen
             name="SignUp"
             component={SignupPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="MyOrders"
+            component={MyOrders}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

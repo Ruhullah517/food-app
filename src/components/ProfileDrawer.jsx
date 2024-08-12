@@ -10,14 +10,16 @@ import LocationIcon from '../../assets/Icons/locationIcon.svg';
 import CardIcon from '../../assets/Icons/Card icon.svg';
 import SettingIcon from '../../assets/Icons/settingIcon.svg';
 import LogoutIcon from '../../assets/Icons/logoutIcon.svg';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 const { width, height } = Dimensions.get('window');
 
 
-
 export default function CustomDrawerContent(props) {
+
+const navigation = useNavigation();
 
   const [loaded] = useFonts({
     LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
@@ -29,7 +31,7 @@ export default function CustomDrawerContent(props) {
 
   })
   const drawerItems = [
-    { label: "My Orders", icon: <OrderIcon width={22} height={26} />, onPress: () => { } },
+    { label: "My Orders", icon: <OrderIcon width={22} height={26} />, onPress: () => { navigation.navigate('MyOrders')} },
     { label: "My Profile", icon: <ProfileIcon width={22} height={26} />, onPress: () => { } },
     { label: "Delivery Address", icon: <LocationIcon width={22} height={26} />, onPress: () => { } },
     { label: "Payment Methods", icon: <CardIcon width={22} height={26} />, onPress: () => { } },
@@ -82,7 +84,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
-
   },
   profileSection: {
     alignItems: 'center',

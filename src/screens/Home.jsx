@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import CartIcon from "../../assets/Icons/cart.svg";
 import FilterIcon from "../../assets/Icons/filterIcon.svg";
@@ -17,6 +17,7 @@ import Arrow from 'react-native-vector-icons/MaterialIcons';
 import BottomNav from '../components/BottomNav';
 import StarIcon from '../../assets/Icons/StarIcon.svg'
 import { useNavigation } from '@react-navigation/native';
+import { ProfileDrawerContext, NotificationsDrawerContext, CartDrawerContext } from '../DrawerContext';
 
 
 const { width, height } = Dimensions.get('window');
@@ -64,6 +65,9 @@ const recommend = [
 
 const HomePage = () => {
 const navigation = useNavigation();
+const { openProfileDrawer } = useContext(ProfileDrawerContext);
+const { openNotificationsDrawer } = useContext(NotificationsDrawerContext);
+const { openCartDrawer } = useContext(CartDrawerContext);
 
     const [currentPage, setCurrentPage] = useState(0);
 
@@ -100,17 +104,17 @@ const navigation = useNavigation();
                         </TouchableOpacity>
                     </View>
                     <View style={styles.headerIcons}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={openCartDrawer}>
                             <View style={styles.iconBack}>
                                 <CartIcon width={16} height={16} style={styles.icon} />
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={openNotificationsDrawer} >
                             <View style={styles.iconBack}>
                                 <NotifyIcon width={16} height={16} style={styles.icon} />
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity  onPress={() => navigation.openDrawer()}>
+                        <TouchableOpacity  onPress={openProfileDrawer}>
                             <View style={styles.iconBack}>
                                 <ProfileIcon width={16} height={16} style={styles.icon} />
                             </View>
