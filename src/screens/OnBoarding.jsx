@@ -65,14 +65,18 @@ const OnBoarding = () => {
 
     const handleNext = () => {
         const currentIndex = Math.round(scrollX._value / width);
-    
+
         if (currentIndex < constants.length - 1) {
             // If not the last page, scroll to the next page
             const nextIndex = currentIndex + 1;
             flatListRef.current.scrollToIndex({ index: nextIndex, animated: true });
         } else {
             // If it's the last page, navigate to the login page
-            navigation.navigate('Login'); 
+            navigation.navigate('MainApp', {
+                screen: 'Home', params: {
+                    screen: 'Login', // This targets the Login screen within the Stack Navigator
+                },
+            });
         }
     };
 
@@ -187,15 +191,15 @@ const styles = StyleSheet.create({
         right: 20,
         padding: 10,
         flexDirection: 'row',
-        justifyContent:'center',
-        alignItems:"center"
+        justifyContent: 'center',
+        alignItems: "center"
 
 
     },
     skipText: {
         color: '#E95322',
         fontSize: 16,
-        fontFamily:'LeagueSpartanSemiBold'
+        fontFamily: 'LeagueSpartanSemiBold'
     },
     card: {
         width: width,
@@ -203,8 +207,8 @@ const styles = StyleSheet.create({
         marginTop: -30,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        paddingVertical:10,
-        paddingHorizontal:30,
+        paddingVertical: 10,
+        paddingHorizontal: 30,
         backgroundColor: '#fff',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -233,7 +237,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         fontFamily: 'LeagueSpartanMedium',
         fontSize: 14,
-        lineHeight:14
+        lineHeight: 14
 
     },
     pagination: {

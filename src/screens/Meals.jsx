@@ -62,7 +62,7 @@ const recommend = [
     }
 ];
 
-const HomePage = () => {
+const MealsPage = () => {
 const navigation = useNavigation();
 const { openProfileDrawer } = useContext(ProfileDrawerContext);
 const { openNotificationsDrawer } = useContext(NotificationsDrawerContext);
@@ -121,7 +121,7 @@ const { openCartDrawer } = useContext(CartDrawerContext);
                     </View>
                 </View>
 
-                <Text style={styles.greeting}>Good Morning</Text>
+                <Text style={styles.greeting}>Meals Page</Text>
                 <Text style={styles.subtitle}>Rise And Shine! It's Breakfast Time</Text>
                 <Card style={styles.card}>
                     <View style={styles.categories}>
@@ -550,4 +550,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default HomePage;
+export default MealsPage;

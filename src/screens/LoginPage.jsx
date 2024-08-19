@@ -7,7 +7,6 @@ import { Button, IconButton } from 'react-native-paper';
 import GmailIcon from '../../assets/Icons/Gmail.svg';
 import MarkIcon from '../../assets/Icons/Mark.svg';
 import FBIcon from '../../assets/Icons/Facebook.svg';
-import BottomNav from '../components/BottomNav';
 import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
@@ -85,7 +84,7 @@ const LoginPage = () => {
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button
                                 mode="contained"
-                                onPress={() => navigation.navigate('Home')}
+                                onPress={() => navigation.navigate('HomePage')}
                                 style={styles.loginButton}
                                 labelStyle={styles.loginButtonText}
                             >
@@ -114,7 +113,6 @@ const LoginPage = () => {
                 </Card>
             </View>
         </ScrollView>
-        <BottomNav />
     </>
     )
 };

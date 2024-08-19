@@ -5,9 +5,11 @@ import BackArrow from '../../assets/Icons/backarrow.svg'
 import { useFonts } from 'expo-font';
 import { Button } from 'react-native-paper';
 import DimDocument from '../../assets/Icons/dimDocument.svg'
-import BottomNav from '../components/BottomNav';
 import { useNavigation } from '@react-navigation/native';
 import OrderItem from '../components/OrderItem';
+import ActiveOrders from '../components/ActiveOrders';
+import CompletedOrders from '../components/CompletedOrders';
+import CancelledOrders from '../components/CancelledOrders';
 
 const { width, height } = Dimensions.get('window');
 
@@ -25,24 +27,7 @@ const MyOrders = () => {
     })
     const [pressed, setPressed] = useState(0);
 
-    const OrderItems = [
-        {
-            image: require('../../assets/icecream.png'),
-            name: 'Strawberry Shake',
-            price: 20.00,
-            date: '29/11/24',
-            time: '15:00',
-            quantity: 1,
-        },
-        {
-            image: require('../../assets/lasagna.png'),
-            name: 'Broccoli Lasagna',
-            price: 12.00,
-            date: '29/11/24',
-            time: '12:00',
-            quantity: 1,
-        },
-    ];
+
 
     if (!loaded) {
         return null;
@@ -50,7 +35,9 @@ const MyOrders = () => {
     return (<>
         <View style={styles.header}>
             <View style={styles.headerText}>
-                <BackArrow />
+                <TouchableOpacity  style={{padding:5, marginLeft:-5}} onPress={()=>navigation.goBack()}>
+                    <BackArrow />
+                </TouchableOpacity>
                 <Text style={styles.login}>My Orders</Text>
             </View>
 
@@ -82,34 +69,13 @@ const MyOrders = () => {
                             Cancelled
                         </Button>
                     </View>
-                    {OrderItems.length < 1 ?
-                        <View style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 70 }}>
-                            <DimDocument width={140} height={167} />
-                            <Text style={{ fontFamily: 'LeagueSpartanMedium', color: '#E95322', fontSize: 30, textAlign: 'center', marginTop: 20 }}>You don't have any active orders at this time</Text>
-                        </View> :
-                        <View>
-                            <View
-                                style={{
-                                    width: '96%',
-                                    backgroundColor: '#FFD8C7',
-                                    height: 1,
-                                    marginLeft: 5,
-                                    marginTop:20
-                                }}
-                            />
-                            {
-                                OrderItems.map((order, index) => (
-                                    <OrderItem
-                                        key={index}
-                                        order={order} />
-                                        
-                                ))}
-                        </View>
-                    }
+                    {pressed === 0 ? <ActiveOrders pressed={0} /> : null}
+                    {pressed === 1 ? <CompletedOrders pressed={1} /> : null}
+                    {pressed === 2 ? <CancelledOrders pressed={2} /> : null}
                 </View>
             </Card>
         </View>
-        <BottomNav />
+
     </>
     )
 };

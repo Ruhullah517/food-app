@@ -19,7 +19,7 @@ const { width, height } = Dimensions.get('window');
 
 export default function CustomDrawerContent(props) {
 
-const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const [loaded] = useFonts({
     LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
@@ -31,10 +31,10 @@ const navigation = useNavigation();
 
   })
   const drawerItems = [
-    { label: "My Orders", icon: <OrderIcon width={22} height={26} />, onPress: () => { navigation.navigate('MyOrders')} },
-    { label: "My Profile", icon: <ProfileIcon width={22} height={26} />, onPress: () => { } },
-    { label: "Delivery Address", icon: <LocationIcon width={22} height={26} />, onPress: () => { } },
-    { label: "Payment Methods", icon: <CardIcon width={22} height={26} />, onPress: () => { } },
+    { label: "My Orders", icon: <OrderIcon width={22} height={26} />, onPress: () => { navigation.navigate('MyOrders') } },
+    { label: "My Profile", icon: <ProfileIcon width={22} height={26} />, onPress: () => { navigation.navigate('MyProfile') } },
+    { label: "Delivery Address", icon: <LocationIcon width={22} height={26} />, onPress: () => {navigation.navigate('DeliveryAddress') } },
+    { label: "Payment Methods", icon: <CardIcon width={22} height={26} />, onPress: () => {navigation.navigate('PaymentMethods') } },
     { label: "Contact Us", icon: <CallIcon width={22} height={26} />, onPress: () => { } },
     { label: "Help & FAQs", icon: <ChatIcon width={22} height={26} />, onPress: () => { } },
     { label: "Settings", icon: <SettingIcon width={22} height={26} />, onPress: () => { } },
@@ -63,10 +63,10 @@ const navigation = useNavigation();
             onPress={item.onPress}
             icon={() => <View style={styles.iconBack}>{item.icon}</View>}
           />
-          {index < drawerItems.length - 1 ? < View style={{ width: "75%", backgroundColor: '#FFD8C7', height: 1, marginLeft: 20 }}></View >: null
-}</>
+          {index < drawerItems.length - 1 ? < View style={{ width: "75%", backgroundColor: '#FFD8C7', height: 1, marginLeft: 20 }}></View > : null
+          }</>
         ))}
-    </View>
+      </View>
     </DrawerContentScrollView >
   );
 }
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
+    zIndex: 100
   },
   profileSection: {
     alignItems: 'center',
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 40,
-    marginTop:10
+    marginTop: 10
   },
   userName: {
     fontSize: 33,

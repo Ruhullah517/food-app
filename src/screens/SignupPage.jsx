@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Dimensions, ScrollView, Alert} from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Dimensions, ScrollView, Alert } from 'react-native';
 import { Card } from 'react-native-paper';
 import BackArrow from '../../assets/Icons/backarrow.svg'
 import { useFonts } from 'expo-font';
@@ -7,7 +7,6 @@ import { Button, IconButton } from 'react-native-paper';
 import GmailIcon from '../../assets/Icons/Gmail.svg';
 import MarkIcon from '../../assets/Icons/Mark.svg';
 import FBIcon from '../../assets/Icons/Facebook.svg';
-import BottomNav from '../components/BottomNav';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -50,7 +49,9 @@ const SignupPage = () => {
     return (<>
         <View style={styles.header}>
             <View style={styles.headerText}>
-                <BackArrow />
+                <TouchableOpacity style={{padding:5, marginLeft:-5}} onPress={() => navigation.goBack()}>
+                    <BackArrow />
+                </TouchableOpacity>
                 <Text style={styles.signup}>New Account</Text>
             </View>
 
@@ -135,7 +136,7 @@ const SignupPage = () => {
                         </Text>
                         <Button
                             mode="contained"
-                            onPress={() => {navigation.navigate('Login')}}
+                            onPress={() => { navigation.navigate('Login') }}
                             style={styles.loginButton}
                             labelStyle={styles.loginButtonText}
                         >
@@ -164,7 +165,7 @@ const SignupPage = () => {
             </Card>
         </View>
 
-        <BottomNav />
+
     </>
     )
 };
@@ -180,7 +181,7 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'center',
-            columnGap: 70
+            columnGap: 60
         }
         ,
         signup: {

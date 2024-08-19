@@ -1,11 +1,15 @@
 import { useFonts } from 'expo-font';
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-
+import DoneIcon from '../../assets/Icons/DoneIcon.svg';
+import CancelIcon from '../../assets/Icons/CancelIcon.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
-const OrderItem = ({ order }) => {
+const OrderItem = ({ order, pressed }) => {
+  const navigation = useNavigation();
+  
 
   const [loaded] = useFonts({
     LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
@@ -22,25 +26,50 @@ const OrderItem = ({ order }) => {
   }
   return (<>
     <View style={styles.container}>
-      <View style={styles.leftSide}>
-        <Image source={order.image} style={styles.image} />
-        <View style={styles.details}>
-          <Text style={styles.itemName}>{order.name}</Text>
-          <Text style={styles.date}>{order.date}</Text>
-          <TouchableOpacity style={styles.cancelButton}>
-            <Text style={styles.cancelButtonText}>Cancel Order</Text>
-          </TouchableOpacity>
+      <Image source={order.image} style={styles.image} />
+      <View style={pressed != 2 ? styles.detailContainer : styles.detailContainerCancelled}>
+        <View style={styles.leftSide}>
+          <View style={pressed === 0 ? styles.detailsActive : styles.detailsCompleted}>
+            <Text style={styles.itemName}>{order.name}</Text>
+            <Text style={styles.date}>{order.date}, {order.time}</Text>
+            {pressed !== 0 && (
+              <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', columnGap: 3 }}>
+                {pressed === 1 ? <DoneIcon width={10} height={10} /> : <CancelIcon width={10} height={10} />}
+                <Text style={{ color: '#E95322', fontFamily: 'LeagueSpartanLight', fontSize: 12 }}>
+                  {pressed === 1 ? "Order delivered" : "Order Cancelled"}
+                </Text>
+              </View>
+            )}
+            {pressed !== 2 && (
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={() => {
+                  if (pressed === 1) {
+                    navigation.navigate('LeaveReview', {order});
+                  }else{
+                    navigation.navigate('CancelOrder', {order});
+                  }
+                }}
+              >
+                {pressed === 0 ? (
+                  <Text style={styles.cancelButtonText}>Cancel Order</Text>
+                ) : (
+                  pressed === 1 && <Text style={styles.cancelButtonText}>Leave a review</Text>
+                )}
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
+
+        <View style={pressed === 0 ? styles.rightSideActive : styles.rightSideCompleted}>
+          <Text style={styles.price}>${order.price.toFixed(2)}</Text>
+          <Text style={styles.quantity}>{order.quantity} items</Text>
+          {pressed != 2 ? <TouchableOpacity style={pressed === 0 ? styles.trackButtonActive : styles.trackButtonCompleted}>
+            <Text style={styles.trackButtonText}>{pressed === 0 ? "Track Driver" : pressed === 1 ? "Order Again" : null}</Text>
+          </TouchableOpacity> : null}
         </View>
       </View>
-
-      <View style={styles.rightSide}>
-        <Text style={styles.price}>${order.price}</Text>
-        <Text style={styles.quantity}>{order.quantity} items</Text>
-        <TouchableOpacity style={styles.trackButton}>
-          <Text style={styles.trackButtonText}>Track Driver</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </View >
     <View
       style={{
         width: '96%',
@@ -56,34 +85,55 @@ const OrderItem = ({ order }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     paddingHorizontal: 5,
     paddingVertical: 10,
     borderRadius: 15,
     marginBottom: 5,
     alignItems: 'center',
-    width: width * 0.87
+    width: "100%",
   },
+  detailContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 108,
+    columnGap: 15
+  },
+  detailContainerCancelled: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 108,
+    columnGap: 50
+  }
+  ,
   leftSide: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    width: width * 0.5,
+
   },
   image: {
     width: 71,
     height: 108,
     borderRadius: 20,
   },
-  details: {
-    marginLeft: 10,
-    justifyContent: 'center',
+  detailsActive: {
+    marginLeft: 5,
+    justifyContent: 'space-evenly',
     flexDirection: 'column',
-    rowGap: 3
+    height: 108
+  },
+  detailsCompleted: {
+    marginLeft: 5,
+    justifyContent: 'space-evenly',
+    flexDirection: 'column',
+    // rowGap:2,
+    height: 95
+
   },
   itemName: {
     fontSize: 20,
     fontFamily: 'LeagueSpartanMedium',
     color: '#391713',
+    width: 155
   },
   date: {
     fontSize: 14,
@@ -93,10 +143,11 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     backgroundColor: '#E95322',
-    paddingVertical: 6,
+    paddingVertical: 1,
     paddingHorizontal: 10,
     borderRadius: 20,
-    width: "74%",
+    width: 114,
+    height: 26
 
   },
   cancelButtonText: {
@@ -105,10 +156,21 @@ const styles = StyleSheet.create({
     fontFamily: 'LeagueSpartanMedium',
     width: '100%'
   },
-  rightSide: {
+  rightSideActive: {
     alignItems: 'flex-end',
     flexDirection: 'column',
-    rowGap: 3
+    justifyContent: 'space-evenly',
+    marginLeft: -45,
+    // rowGap:5,
+    height: 100
+  },
+  rightSideCompleted: {
+    alignItems: 'flex-end',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    marginLeft: -45,
+    // rowGap:5,
+    height: 100
   },
   price: {
     fontSize: 20,
@@ -123,11 +185,21 @@ const styles = StyleSheet.create({
     fontFamily: 'LeagueSpartanLight',
 
   },
-  trackButton: {
+  trackButtonActive: {
     backgroundColor: '#FFE7DF',
-    paddingVertical: 6,
+    paddingVertical: 1,
     paddingHorizontal: 10,
     borderRadius: 20,
+    width: 95,
+    height: 25
+  },
+  trackButtonCompleted: {
+    backgroundColor: '#FFE7DF',
+    paddingVertical: 1,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    width: 100,
+    height: 26
   },
   trackButtonText: {
     color: '#E95322',

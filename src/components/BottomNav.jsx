@@ -5,33 +5,67 @@ import HeartIcon from "../../assets/Icons/heartIconWhite.svg";
 import DishIcon from "../../assets/Icons/DishIcon.svg";
 import OrderIcon from "../../assets/Icons/orderBoard.svg";
 import HeadPhoneIcon from "../../assets/Icons/headPhoneIcon.svg";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
+
+const Tab = createBottomTabNavigator();
+
+// export function BottomTabs() {
+//   return (
+//     <Tab.Navigator style={styles.container} >
+//       <Tab.Screen name='Home' component={HomeDrawer}
+//         options={{
+//           tabBarIcon: ({ focused }) => (
+//             <TouchableOpacity style={styles.navItem}>
+//               <HomeIcon
+//                 style={styles.icon}
+//               />
+//             </TouchableOpacity>
+//           )
+//         }}
+//       />
+//       <Tab.Screen name='Meals' component={MealsPage}
+//         options={{
+//           tabBarIcon: ({ focused }) => (
+//             <TouchableOpacity style={styles.navItem}>
+//               <DishIcon
+//                 style={styles.icon}
+//               />
+//             </TouchableOpacity>
+//           )
+//         }}
+//       />
+//     </Tab.Navigator>
+//   );
+// }
 
 const BottomNav = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.navItem}>
-        <HomeIcon 
-          style={styles.icon} 
+      <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('HomePage')}>
+        <HomeIcon
+          style={styles.icon}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('MealsPage')}>
+        <DishIcon
+          style={styles.icon}
         />
       </TouchableOpacity>
       <TouchableOpacity style={styles.navItem}>
-        <DishIcon 
-          style={styles.icon} 
-        />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}>
-        <HeartIcon 
-          style={styles.icon} 
+        <HeartIcon
+          style={styles.icon}
         />
       </TouchableOpacity>
       <TouchableOpacity style={styles.navItem}>
         <OrderIcon
-          style={styles.icon} 
+          style={styles.icon}
         />
       </TouchableOpacity>
       <TouchableOpacity style={styles.navItem}>
-        <HeadPhoneIcon 
-          style={styles.icon} 
+        <HeadPhoneIcon
+          style={styles.icon}
         />
       </TouchableOpacity>
     </View>
@@ -52,9 +86,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
-    elevation: 5,
-    borderTopLeftRadius:30,
-    borderTopRightRadius:30
+    elevation: 1,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   navItem: {
     alignItems: 'center',

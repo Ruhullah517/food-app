@@ -4,10 +4,6 @@ import { Card } from 'react-native-paper';
 import BackArrow from '../../assets/Icons/backarrow.svg'
 import { useFonts } from 'expo-font';
 import { Button, IconButton } from 'react-native-paper';
-import GmailIcon from '../../assets/Icons/Gmail.svg';
-import MarkIcon from '../../assets/Icons/Mark.svg';
-import FBIcon from '../../assets/Icons/Facebook.svg';
-import BottomNav from '../components/BottomNav';
 import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
@@ -95,7 +91,7 @@ const SetPassword = () => {
                 </View>
             </Card>
         </View>
-        <BottomNav />
+   
     </>
     )
 };
