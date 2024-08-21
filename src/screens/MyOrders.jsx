@@ -14,7 +14,7 @@ import CancelledOrders from '../components/CancelledOrders';
 const { width, height } = Dimensions.get('window');
 
 
-const MyOrders = () => {
+const MyOrders = ({props}) => {
     const navigation = useNavigation();
     const [loaded] = useFonts({
         LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),

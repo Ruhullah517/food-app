@@ -26,10 +26,15 @@ const AddCardPage = () => {
 
     });
 
+    const [cardHolderName, setCardHolderName] = useState('')
+    const [cardNumber, setCardNumber] = useState('')
+    const [expiryDate, setExpiryDate] = useState('')
+    const [cvv, setCvv] = useState('')
     const cardData = {
         cardNumber: '000 000 000 00',
         cardHolderName: 'John Smith',
         expiryDate: '04/28',
+        cvv: "0000"
     };
 
 
@@ -50,6 +55,7 @@ const AddCardPage = () => {
                     <View style={styles.cardContainer}>
                         <Polygon width={297} height={277} style={styles.polygon1} />
                         <Polygon2 width={278} height={297} style={styles.polygon2} />
+                        <View style={{width:51, height:12, borderWidth:2, borderColor:'#391713', position:'absolute', right:18, top:15, borderRadius:2.5}}></View>
                         <View style={styles.cardDetails}>
                             <Text style={styles.accountNmbr}>{cardData.cardNumber}</Text>
 
@@ -62,7 +68,7 @@ const AddCardPage = () => {
                                     <Text style={styles.title}>Expiry Date</Text>
                                     <Text style={styles.info}>{cardData.expiryDate}</Text>
                                 </View>
-                                <ChipIcon width={30} height={26} />
+                                <ChipIcon width={30} height={26}  style={{marginLeft:5}}/>
                             </View>
 
 
@@ -74,8 +80,8 @@ const AddCardPage = () => {
                             <TextInput
                                 style={styles.input}
                                 placeholderTextColor="#391713"
-                                value={name}
-                                onChangeText={setName}
+                                value={cardData.cardHolderName}
+                                onChangeText={setCardHolderName}
                             />
 
                         </View>
@@ -84,45 +90,49 @@ const AddCardPage = () => {
                             <TextInput
                                 style={styles.inputAddress}
                                 placeholderTextColor="#391713"
-                                value={address}
-                                onChangeText={setAddress}
+                                value={cardData.cardNumber}
+                                onChangeText={setCardNumber}
                                 multiline={true}
                             />
 
                         </View>
-                        <View>
-                            <Text style={styles.label}>Expiry Date</Text>
-                            <TextInput
-                                style={styles.inputAddress}
-                                placeholderTextColor="#391713"
-                                value={address}
-                                onChangeText={setAddress}
-                                multiline={true}
-                            />
+                        <View style={{flexDirection:'row', columnGap:65}}>
+                            <View>
+                                <Text style={styles.label}>Expiry Date</Text>
+                                <TextInput
+                                    style={styles.inputAddress}
+                                    placeholderTextColor="#391713"
+                                    value={cardData.expiryDate}
+                                    onChangeText={setExpiryDate}
+                                    multiline={true}
+                                />
+                            </View>
+                            <View>
+                                <Text style={styles.label}>CVV</Text>
+                                <TextInput
+                                    style={styles.inputAddress}
+                                    placeholderTextColor="#391713"
+                                    value={cardData.cvv}
+                                    onChangeText={setCvv}
+                                    multiline={true}
+                                />
+
+                            </View>
+
 
                         </View>
-                        <View>
-                            <Text style={styles.label}>CVV</Text>
-                            <TextInput
-                                style={styles.inputAddress}
-                                placeholderTextColor="#391713"
-                                value={address}
-                                onChangeText={setAddress}
-                                multiline={true}
-                            />
 
-                        </View>
 
                     </View>
 
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <Button
                             mode="contained"
-                            onPress={() => { navigation.navigate('Login') }}
+                            onPress={() => { }}
                             style={styles.loginButton}
                             labelStyle={styles.loginButtonText}
                         >
-                            Apply
+                            Save Card
                         </Button>
                     </View>
                 </Card>
@@ -225,29 +235,29 @@ const styles = StyleSheet.create(
             justifyContent: 'center',
             flexDirection: 'column',
             rowGap: 15,
-            paddingBottom: 80
+            paddingBottom: 50
         },
         input: {
-            height: 35,
+            height: 'auto',
             borderColor: '#8b4513',
             borderRadius: 13,
-            paddingHorizontal: 25,
+            paddingHorizontal: 20,
             backgroundColor: '#F3E9B5',
             fontFamily: 'LeagueSpartanRegular',
             fontSize: 20,
             color: '#391713',
-            paddingVertical: 5
+            paddingVertical: 8
         },
         inputAddress: {
             height: "auto",
             borderColor: '#8b4513',
             borderRadius: 13,
-            paddingHorizontal: 25,
+            paddingHorizontal: 20,
             backgroundColor: '#F3E9B5',
             fontFamily: 'LeagueSpartanRegular',
             fontSize: 20,
             color: '#391713',
-            paddingVertical: 10
+            paddingVertical: 8
         },
         label: {
             color: '#391713',
@@ -258,8 +268,8 @@ const styles = StyleSheet.create(
         loginButton: {
             backgroundColor: '#E95322',
             borderRadius: 30,
-            width: 116,
-            height: 28,
+            width: 106,
+            height: 36,
             marginTop: 8,
             marginBottom: 4,
             justifyContent: 'center',

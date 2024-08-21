@@ -19,20 +19,23 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "2c7a1fa3-6905-485a-a98a-d03f4b3184d6"
+        "projectId": "0dfcbfdf-327c-467c-999f-7a028b68037b"
       }
     },
     "plugins": [
       "expo-font",
       "expo-image-picker"
-   
-    ]
+    ],
+    "owner": "ruhullah"
   }
 }

@@ -6,15 +6,18 @@ import { useFonts } from 'expo-font';
 import { Button, IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import CircleIcon from '../../assets/Icons/CircleIcon.svg';
-import CardIcon from '../../assets/Icons/Card icon.svg';
-import AppleIcon from '../../assets/Icons/Mac.svg';
-import GooglePlayIcon from '../../assets/Icons/Google-play.svg';
-import PaypalIcon from '../../assets/Icons/Paypal.svg';
+import HeadphoneIcon from '../../assets/Icons/headPhone2.svg';
+import WebIcon from '../../assets/Icons/Web.svg';
+import WhatsappIcon from '../../assets/Icons/WhatApp.svg';
+import InstaIcon from '../../assets/Icons/Insta.svg';
+import FBIcon from '../../assets/Icons/Facebook.svg';
+import ContactUsSection from '../components/ContactUsSection';
+import FAQ from '../components/FAQsSection';
 
 const { width, height } = Dimensions.get('window');
 
 
-const PaymentMethodsPage = () => {
+const ContactUsPage = () => {
     const navigation = useNavigation();
 
     const [loaded] = useFonts({
@@ -26,30 +29,37 @@ const PaymentMethodsPage = () => {
         LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
 
     })
+    const [pressed, setPressed] = useState(1);
 
     const [payMethods, setPayMethods] = useState([
         {
             id: 1,
-            title: "*** *** *** 43",
-            icon: <CardIcon width={39} height={27} />,
+            title: "Customer Service",
+            icon: <HeadphoneIcon width={35} height={24} strokeWidth={2} />,
             checked: false
         },
         {
             id: 2,
-            title: "Apple Pay",
-            icon: <AppleIcon width={34} height={47} />,
+            title: "Website",
+            icon: <WebIcon width={34} height={33} />,
             checked: false
         },
         {
             id: 3,
-            title: "Paypal",
-            icon: <PaypalIcon  width={31} height={39}/>,
+            title: "Whatsapp",
+            icon: <WhatsappIcon width={35} height={35} />,
             checked: false
         },
         {
             id: 4,
-            title: "Google-Pay",
-            icon: <GooglePlayIcon width={32} height={39}/>,
+            title: "Facebook",
+            icon: <FBIcon width={35} height={35} />,
+            checked: false
+        },
+        {
+            id: 5,
+            title: "Instagram",
+            icon: <InstaIcon width={35} height={35} />,
             checked: false
         }
     ]);
@@ -77,55 +87,34 @@ const PaymentMethodsPage = () => {
                     <TouchableOpacity style={{ padding: 5, marginLeft: -5 }} onPress={() => navigation.goBack()}>
                         <BackArrow />
                     </TouchableOpacity>
-                    <Text style={styles.signup}>Payment Methods</Text>
+                    <View style={{ flexDirection: 'column' }}>
+                        <Text style={styles.signup}>Contact Us</Text>
+                        <Text style={{color:'#E95322', fontFamily:'LeagueSpartanRegular', fontSize:16}}>How can we help you?</Text>
+                    </View>
                 </View>
 
                 <Card style={styles.card}>
-
                     <View style={styles.container}>
-                        {payMethods.map(method => {
-                            return (
-                                <>
-                                    <View style={styles.rowBox} >
-                                        <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 20 }}>
-                                            {method.icon}
-                                            
-                                                <Text style={styles.label}>{method.title}</Text>
-                                           
-                                        </View>
-                                        <TouchableOpacity
-                                            onPress={() => handleCheckboxPress(method.id)}
-                                            style={{
-                                                borderColor: "#FF5722",
-                                                padding: 2,
-                                                borderRadius: 20,
-                                                borderWidth: 1,
-                                                backgroundColor: '#FFFFFF'
-                                            }}
-                                        >
-                                            <CircleIcon
-                                                color='#FF5722'
-                                                fill={method.checked ? '#FF5722' : '#FFFFFF'}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={{ width: "100%", borderTopWidth: 1, borderTopColor: '#FFD8C7' }}></View>
-                                    </>
-                                    
-                            )
-                        })}
+                        <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row', columnGap: 10, marginBottom: 30 }}>
+                            <Button
+                                mode="contained"
+                                onPress={() => setPressed(0)}
+                                style={pressed === 0 ? styles.loginButtonActive : styles.loginButtonUpper}
+                                labelStyle={pressed === 0 ? styles.loginButtonTextActive : styles.loginButtonText}
+                            >
+                                FAQ
+                            </Button>
+                            <Button
+                                mode="contained"
+                                onPress={() => setPressed(1)}
+                                style={pressed === 1 ? styles.loginButtonActive : styles.loginButtonUpper}
+                                labelStyle={pressed === 1 ? styles.loginButtonTextActive : styles.loginButtonText}
+                            >
+                                Contact Us
+                            </Button>
+                        </View>
+                        {pressed === 1 ? <ContactUsSection /> : <FAQ />}
 
-                    </View>
-
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Button
-                            mode="contained"
-                            onPress={() => { navigation.navigate('AddCard') }}
-                            style={styles.loginButton}
-                            labelStyle={styles.loginButtonText}
-                        >
-                            Add New Card
-                        </Button>
                     </View>
                 </Card>
             </View>
@@ -146,7 +135,8 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'center',
-            columnGap: 50
+            columnGap: 75,
+            marginTop:20
         }
         ,
         signup: {
@@ -160,7 +150,7 @@ const styles = StyleSheet.create(
             width: width,
             height: "100%",
             alignSelf: 'center',
-            marginTop: 50,
+            marginTop: 10,
             paddingBottom: 60,
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
@@ -177,55 +167,48 @@ const styles = StyleSheet.create(
         container: {
             paddingTop: 15,
             justifyContent: 'center',
+            alignItems:'center',
             flexDirection: 'column',
             rowGap: 15,
             paddingBottom: 80,
-        },
-        rowBox: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingLeft: 5
+            width:"100%"
         },
         description: {
             fontSize: 14,
             fontFamily: "LeagueSpartanLight"
         },
-        input: {
-            height: 35,
-            borderColor: '#8b4513',
-            borderRadius: 13,
-            paddingHorizontal: 15,
-            backgroundColor: '#F3E9B5',
-            fontFamily: 'LeagueSpartanMedium',
-            fontSize: 20,
-            color: '#391713',
-        },
-        label: {
-            color: '#391713',
-            fontFamily: 'LeagueSpartanRegular',
-            fontSize: 20,
-        },
-        loginButton: {
+        loginButtonUpper: {
             backgroundColor: '#FFDECF',
-            borderRadius: 30,
-            width: 128,
-            height: 36,
-            marginTop: 8,
-            marginBottom: 4,
+            borderRadius: 20,
+            width: 150,
+            height: 28,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        loginButtonActive: {
+            backgroundColor: '#E95322',
+            borderRadius: 20,
+            width: 155,
+            height: 28,
             justifyContent: 'center',
             alignItems: 'center',
         },
         loginButtonText: {
             fontSize: 17,
             fontFamily: 'LeagueSpartanRegular',
-            paddingVertical: 1,
             width: "100%",
-            height: '50%',
+            height: 20,
             color: '#E95322'
+        },
+        loginButtonTextActive: {
+            fontSize: 17,
+            fontFamily: 'LeagueSpartanRegular',
+            width: "100%",
+            height: 20,
+
         },
 
     }
 )
 
-export default PaymentMethodsPage;
+export default ContactUsPage;

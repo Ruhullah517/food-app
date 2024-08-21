@@ -22,6 +22,7 @@ import LaunchingTwo from './src/screens/LaunchingScreenTwo';
 // import MealsPage from './src/screens/Meals';
 // import MealsDrawer from './src/components/MealsDrawer';
 import BottomTabs from './src/components/MainNavigator';
+import CommonStackNavigator from './src/components/MainNavigator';
 
 const Stack = createStackNavigator();
 const { width } = Dimensions.get('window');
@@ -34,7 +35,7 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Launching" component={LaunchingTwo} />
           <Stack.Screen name="OnBoarding" component={OnBoarding} />
-          <Stack.Screen name="MainApp" component={BottomTabs} />
+          <Stack.Screen name="MainApp" component={CommonStackNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

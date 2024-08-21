@@ -8,6 +8,7 @@ import DimDocument from '../../assets/Icons/dimDocument.svg'
 const CompletedOrders = ({ pressed }) => {
     const OrderItems = [
         {
+            id:1,
             image: require('../../assets/icecream.png'),
             name: 'Chicken Curry',
             price: 50.00,
@@ -16,6 +17,7 @@ const CompletedOrders = ({ pressed }) => {
             quantity: 1,
         },
         {
+            id:2,
             image: require('../../assets/lasagna.png'),
             name: 'Bean and Vegetable Burger',
             price: 52.00,
@@ -45,9 +47,9 @@ const CompletedOrders = ({ pressed }) => {
                         }}
                     />
                     {
-                        OrderItems.map((order, index) => (
+                        OrderItems.map((order) => (
                             <OrderItem
-                                key={index}
+                                key={order.id}
                                 order={order}
                                 pressed={pressed} />
 

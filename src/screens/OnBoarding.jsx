@@ -73,9 +73,7 @@ const OnBoarding = () => {
         } else {
             // If it's the last page, navigate to the login page
             navigation.navigate('MainApp', {
-                screen: 'Home', params: {
-                    screen: 'Login', // This targets the Login screen within the Stack Navigator
-                },
+                screen: 'Login'
             });
         }
     };

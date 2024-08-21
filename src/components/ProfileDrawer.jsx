@@ -35,8 +35,8 @@ export default function CustomDrawerContent(props) {
     { label: "My Profile", icon: <ProfileIcon width={22} height={26} />, onPress: () => { navigation.navigate('MyProfile') } },
     { label: "Delivery Address", icon: <LocationIcon width={22} height={26} />, onPress: () => {navigation.navigate('DeliveryAddress') } },
     { label: "Payment Methods", icon: <CardIcon width={22} height={26} />, onPress: () => {navigation.navigate('PaymentMethods') } },
-    { label: "Contact Us", icon: <CallIcon width={22} height={26} />, onPress: () => { } },
-    { label: "Help & FAQs", icon: <ChatIcon width={22} height={26} />, onPress: () => { } },
+    { label: "Contact Us", icon: <CallIcon width={22} height={26} />, onPress: () => {navigation.navigate('ContactUs') } },
+    { label: "Help & FAQs", icon: <ChatIcon width={22} height={26} />, onPress: () => { navigation.navigate('Help&FAQs')} },
     { label: "Settings", icon: <SettingIcon width={22} height={26} />, onPress: () => { } },
     { label: "Log Out", icon: <LogoutIcon width={22} height={26} />, onPress: () => { } },
   ];
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
-    zIndex: 100
   },
   profileSection: {
     alignItems: 'center',

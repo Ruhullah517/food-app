@@ -74,7 +74,7 @@ const AddNewAddressPage = () => {
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <Button
                             mode="contained"
-                            onPress={() => { navigation.navigate('Login') }}
+                            onPress={() => {  }}
                             style={styles.loginButton}
                             labelStyle={styles.loginButtonText}
                         >
