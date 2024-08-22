@@ -20,17 +20,22 @@ const SetPassword = () => {
         LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
 
     })
-    const [email, setEmail] = useState('');
+
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     if (!loaded) {
         return null;
     }
     return (<>
+
         <View style={styles.header}>
             <View style={styles.headerText}>
-                <BackArrow />
+                <TouchableOpacity style={{ padding: 5, marginLeft: -5 }} onPress={() => navigation.goBack()}>
+                    <BackArrow />
+                </TouchableOpacity>
                 <Text style={styles.login}>Set Password</Text>
             </View>
 
@@ -66,15 +71,15 @@ const SetPassword = () => {
                                 style={styles.passwordInput}
                                 placeholder="**********"
                                 placeholderTextColor="#391713"
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry={!showPassword}
+                                value={confirmPassword}
+                                onChangeText={setConfirmPassword}
+                                secureTextEntry={!showConfirmPassword}
                             />
                             <IconButton
-                                icon={showPassword ? "eye" : "eye-off"}
+                                icon={showConfirmPassword ? "eye" : "eye-off"}
                                 iconColor="#E95322"
                                 size={20}
-                                onPress={() => setShowPassword(!showPassword)}
+                                onPress={() => setShowConfirmPassword(!showConfirmPassword)}
                             />
                         </View>
                     </View>
@@ -91,7 +96,8 @@ const SetPassword = () => {
                 </View>
             </Card>
         </View>
-   
+
+
     </>
     )
 };
@@ -119,9 +125,9 @@ const styles = StyleSheet.create(
         },
         card: {
             width: width,
+            height: "100%",
             alignSelf: 'center',
             marginTop: 50,
-            paddingBottom: "100%",
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
             padding: 20,
@@ -131,12 +137,14 @@ const styles = StyleSheet.create(
             shadowOpacity: 0.8,
             shadowRadius: 2,
             elevation: 5,
-            bottom: 0
+            bottom: 0,
+            position: 'relative'
         }
         ,
         container: {
             padding: 5,
             justifyContent: 'center',
+            position: 'relative'
         },
         welcomeText: {
             fontSize: 24,

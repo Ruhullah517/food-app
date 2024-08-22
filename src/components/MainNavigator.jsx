@@ -22,6 +22,11 @@ import AddCardPage from '../screens/AddCard';
 import ContactUsPage from '../screens/ContactUs';
 import HelpnFAQs from '../screens/Help&FAQs';
 import BottomNavigationWrapper from './BottomNavWrapper';
+import SettingsPage from '../screens/Settings';
+import NotificationSettingPage from '../screens/NotificationSetting';
+import PasswordSettingPage from '../screens/PasswordSetting';
+import ConfirmOrderPage from '../screens/ConfirmOrder';
+import PayNowPage from '../screens/PayNow';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -34,61 +39,61 @@ export default function CommonStackNavigator({ initialRoute }) {
       <Stack.Screen name="MealsPage" component={MealsDrawer} />
       <Stack.Screen name="Login"  >
         {(props) => <BottomNavigationWrapper>
-          <LoginPage {...props}/>
+          <LoginPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="SetPassword" >
         {(props) => <BottomNavigationWrapper>
-          <SetPassword {...props}/>
+          <SetPassword {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="SignUp">
         {(props) => <BottomNavigationWrapper>
-          <SignupPage {...props}/>
+          <SignupPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="MyOrders">
         {(props) => <BottomNavigationWrapper>
-          <MyOrders {...props}/>
+          <MyOrders {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="CancelOrder" >
         {(props) => <BottomNavigationWrapper>
-          <CancelOrderPage {...props}/>
+          <CancelOrderPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="ConfirmationPage">
         {(props) => <BottomNavigationWrapper>
-          <ConfirmationPage {...props}/>
+          <ConfirmationPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="LeaveReview">
         {(props) => <BottomNavigationWrapper>
-          <LeaveReviewPage {...props}/>
+          <LeaveReviewPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="MyProfile">
         {(props) => <BottomNavigationWrapper>
-          <MyProfilePage {...props}/>
+          <MyProfilePage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="DeliveryAddress">
         {(props) => <BottomNavigationWrapper>
-          <DeliveryAddressPage {...props}/>
+          <DeliveryAddressPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="AddNewAddress">
         {(props) => <BottomNavigationWrapper>
-          <AddNewAddressPage {...props}/>
+          <AddNewAddressPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
@@ -100,19 +105,49 @@ export default function CommonStackNavigator({ initialRoute }) {
       </Stack.Screen>
       <Stack.Screen name="AddCard">
         {(props) => <BottomNavigationWrapper>
-          <AddCardPage {...props}/>
+          <AddCardPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="ContactUs">
         {(props) => <BottomNavigationWrapper>
-          <ContactUsPage {...props}/>
+          <ContactUsPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
       <Stack.Screen name="Help&FAQs">
         {(props) => <BottomNavigationWrapper>
-          <HelpnFAQs {...props}/>
+          <HelpnFAQs {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="Settings">
+        {(props) => <BottomNavigationWrapper>
+          <SettingsPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="NotificationSetting">
+        {(props) => <BottomNavigationWrapper>
+          <NotificationSettingPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="PasswordSetting">
+        {(props) => <BottomNavigationWrapper>
+          <PasswordSettingPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="ConfirmOrder">
+        {(props) => <BottomNavigationWrapper>
+          <ConfirmOrderPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="Payment">
+        {(props) => <BottomNavigationWrapper>
+          <PayNowPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>

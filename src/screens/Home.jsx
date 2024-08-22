@@ -308,6 +308,7 @@ const styles = StyleSheet.create({
     },
     card: {
         width: width,
+        height:"100%",
         alignSelf: 'center',
         marginTop: 10,
         borderTopLeftRadius: 30,

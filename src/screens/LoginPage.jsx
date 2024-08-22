@@ -31,8 +31,6 @@ const LoginPage = () => {
         return null;
     }
     return (<>
-        <ScrollView
-            showsVerticalScrollIndicator={true}>
             <View style={styles.header}>
                 <View style={styles.headerText}>
                     <BackArrow />
@@ -112,7 +110,6 @@ const LoginPage = () => {
                     </View>
                 </Card>
             </View>
-        </ScrollView>
     </>
     )
 };
@@ -140,9 +137,10 @@ const styles = StyleSheet.create(
         },
         card: {
             width: width,
+            height:"100%",
             alignSelf: 'center',
             marginTop: 50,
-            paddingBottom: 60,
+            paddingBottom: 35,
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
             padding: 20,
@@ -235,7 +233,7 @@ const styles = StyleSheet.create(
         iconGroup: {
             flexDirection: 'row',
             columnGap: 10,
-            marginBottom: 20
+            marginBottom: 8
         },
         iconbackground: {
             backgroundColor: '#FFDECF',

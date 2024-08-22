@@ -193,9 +193,10 @@ const styles = StyleSheet.create(
         },
         card: {
             width: width,
+            height:"100%",
             alignSelf: 'center',
             marginTop: 50,
-            paddingBottom: 60,
+            paddingBottom: 0,
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
             paddingHorizontal: 30,

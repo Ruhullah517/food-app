@@ -36,6 +36,12 @@
       "expo-font",
       "expo-image-picker"
     ],
-    "owner": "ruhullah"
+    "owner": "ruhullah",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/0dfcbfdf-327c-467c-999f-7a028b68037b"
+    }
   }
 }

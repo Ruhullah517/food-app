@@ -21,7 +21,7 @@ const ContactUsSection = () => {
 
     });
 
-    const [payMethods, setPayMethods] = useState([
+    const payMethods= [
         {
             id: 1,
             title: "Customer Service",
@@ -52,7 +52,7 @@ const ContactUsSection = () => {
             icon: <InstaIcon width={35} height={35} />,
             checked: false
         }
-    ]);
+    ];
 
     if (!loaded) {
         return null;

@@ -31,52 +31,6 @@ const ContactUsPage = () => {
     })
     const [pressed, setPressed] = useState(1);
 
-    const [payMethods, setPayMethods] = useState([
-        {
-            id: 1,
-            title: "Customer Service",
-            icon: <HeadphoneIcon width={35} height={24} strokeWidth={2} />,
-            checked: false
-        },
-        {
-            id: 2,
-            title: "Website",
-            icon: <WebIcon width={34} height={33} />,
-            checked: false
-        },
-        {
-            id: 3,
-            title: "Whatsapp",
-            icon: <WhatsappIcon width={35} height={35} />,
-            checked: false
-        },
-        {
-            id: 4,
-            title: "Facebook",
-            icon: <FBIcon width={35} height={35} />,
-            checked: false
-        },
-        {
-            id: 5,
-            title: "Instagram",
-            icon: <InstaIcon width={35} height={35} />,
-            checked: false
-        }
-    ]);
-
-    const handleCheckboxPress = (id) => {
-        const updatedPayMethods = payMethods.map(method =>
-            method.id === id
-                ? { ...method, checked: !method.checked }
-                : { ...method, checked: false }
-        );
-        setPayMethods(updatedPayMethods);
-        console.log(updatedPayMethods);
-    };
-
-
-
-
     if (!loaded) {
         return null;
     }

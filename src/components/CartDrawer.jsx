@@ -8,6 +8,7 @@ import AddIcon from '../../assets/Icons/addIcon.svg';
 import DynamicDrawer from './DynamicDrawer';
 import CartItem from './CartItem';
 import { Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -16,7 +17,7 @@ const { width, height } = Dimensions.get('window');
 
 
 export default function CartDrawer(props) {
-
+  const navigation = useNavigation();
   const [loaded] = useFonts({
     LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
     LeagueSpartanBold: require('../../assets/fonts/League Spartan Bold.ttf'),
@@ -62,6 +63,20 @@ export default function CartDrawer(props) {
 
   const subtotal = calculateSubtotal();
   const total = subtotal + taxAndFees + delivery;
+
+  const handleCheckout = () => {
+
+    const checkoutDetails = {
+      cartItems,
+      subtotal,
+      taxAndFees,
+      delivery,
+      total,
+      setCartItems,
+      updateQuantity
+    };
+    navigation.navigate('ConfirmOrder', { checkoutDetails });
+  }
 
 
   if (!loaded) {
@@ -148,6 +163,7 @@ export default function CartDrawer(props) {
             mode="contained"
             style={styles.loginButton}
             labelStyle={styles.loginButtonText}
+            onPress={handleCheckout}
           >
             Checkout
           </Button>

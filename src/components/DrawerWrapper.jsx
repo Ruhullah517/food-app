@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useContext } from "react";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, StatusBar } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 import ProfileDrawer from './ProfileDrawer';
 import NotificationDrawer from "./NotificationDrawer";
@@ -30,10 +30,10 @@ export default function DrawerWrapper({ children }) {
     <ProfileDrawerContext.Provider value={profileDrawerValue}>
       <NotificationsDrawerContext.Provider value={notificationsDrawerValue}>
         <CartDrawerContext.Provider value={cartDrawerValue}>
-          <View style={{ flex: 1, position:'relative' }}>
+          <View style={{ flex: 1, position: 'relative' }}>
             <Drawer
               open={!!openDrawer}
-              onOpen={() => {}}
+              onOpen={() => { }}
               onClose={() => setOpenDrawer(null)}
               drawerPosition="right"
               renderDrawerContent={() => {
@@ -41,7 +41,7 @@ export default function DrawerWrapper({ children }) {
                 if (openDrawer === "notifications") return <NotificationDrawer />;
                 if (openDrawer === "cart") return <CartDrawer />;
               }}
-              drawerStyle={{ backgroundColor: 'transparent', width: width * 0.83, position:'absolute', zIndex:100,}}
+              drawerStyle={{ backgroundColor: 'transparent', width: width * 0.83, position: 'absolute', zIndex: 100, }}
             >
               <View style={{ flex: 1 }}>
                 {children}

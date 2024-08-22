@@ -9,15 +9,14 @@ import CircleIcon from '../../assets/Icons/CircleIcon.svg';
 import HeadphoneIcon from '../../assets/Icons/headPhone2.svg';
 import WebIcon from '../../assets/Icons/Web.svg';
 import WhatsappIcon from '../../assets/Icons/WhatApp.svg';
-import InstaIcon from '../../assets/Icons/Insta.svg';
-import FBIcon from '../../assets/Icons/Facebook.svg';
-import ContactUsSection from '../components/ContactUsSection';
-import FAQ from '../components/FAQsSection';
+import KeyIcon from '../../assets/Icons/KeyIcon.svg';
+import NotifyIcon from '../../assets/Icons/NotifyIcon.svg';
+import ProfileIcon from '../../assets/Icons/ProfileIcon.svg';
 
 const { width, height } = Dimensions.get('window');
 
 
-const ContactUsPage = () => {
+const SettingsPage = () => {
     const navigation = useNavigation();
 
     const [loaded] = useFonts({
@@ -29,53 +28,32 @@ const ContactUsPage = () => {
         LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
 
     })
-    const [pressed, setPressed] = useState(1);
 
-    const [payMethods, setPayMethods] = useState([
+    const settings = [
         {
             id: 1,
-            title: "Customer Service",
-            icon: <HeadphoneIcon width={35} height={24} strokeWidth={2} />,
-            checked: false
+            title: "Notification Setting",
+            icon: <NotifyIcon width={24} height={35} strokeWidth={1.5} />,
+            checked: false,
+            onPress: () => { navigation.navigate('NotificationSetting') }
         },
         {
             id: 2,
-            title: "Website",
-            icon: <WebIcon width={34} height={33} />,
-            checked: false
+            title: "Password Setting",
+            icon: <KeyIcon width={35} height={34} />,
+            checked: false,
+            onPress: () => {navigation.navigate('PasswordSetting') }
+
         },
         {
             id: 3,
-            title: "Whatsapp",
-            icon: <WhatsappIcon width={35} height={35} />,
-            checked: false
-        },
-        {
-            id: 4,
-            title: "Facebook",
-            icon: <FBIcon width={35} height={35} />,
-            checked: false
-        },
-        {
-            id: 5,
-            title: "Instagram",
-            icon: <InstaIcon width={35} height={35} />,
-            checked: false
+            title: "Delete Account",
+            icon: <ProfileIcon width={23} height={34} strokeWidth={1.3} />,
+            checked: false,
+            onPress: () => { }
+
         }
-    ]);
-
-    const handleCheckboxPress = (id) => {
-        const updatedPayMethods = payMethods.map(method =>
-            method.id === id
-                ? { ...method, checked: !method.checked }
-                : { ...method, checked: false }
-        );
-        setPayMethods(updatedPayMethods);
-        console.log(updatedPayMethods);
-    };
-
-
-
+    ];
 
     if (!loaded) {
         return null;
@@ -89,13 +67,31 @@ const ContactUsPage = () => {
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
                         <Text style={styles.signup}>Settings</Text>
-                        <Text style={{color:'#E95322', fontFamily:'LeagueSpartanRegular', fontSize:16}}>How can we help you?</Text>
                     </View>
                 </View>
 
                 <Card style={styles.card}>
                     <View style={styles.container}>
+                        {settings.map(item => {
+                            return (
+                                <>
+                                    <TouchableOpacity style={styles.rowBox} onPress={item.onPress}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 20 }}>
+                                            <View style={{ justifyContent: 'center', alignItems: 'center', width: 25, height: 35, }}>
+                                                {item.icon}
+                                            </View>
 
+                                            <Text style={styles.label}>{item.title}</Text>
+
+                                        </View>
+                                        <TouchableOpacity style={styles.downArrow}>
+                                            <BackArrow />
+                                        </TouchableOpacity>
+                                    </TouchableOpacity>
+                                </>
+
+                            )
+                        })}
                     </View>
                 </Card>
             </View>
@@ -116,8 +112,8 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'center',
-            columnGap: 75,
-            marginTop:20
+            columnGap: 90,
+            marginTop: 20
         }
         ,
         signup: {
@@ -131,7 +127,7 @@ const styles = StyleSheet.create(
             width: width,
             height: "100%",
             alignSelf: 'center',
-            marginTop: 10,
+            marginTop: 20,
             paddingBottom: 60,
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
@@ -148,11 +144,11 @@ const styles = StyleSheet.create(
         container: {
             paddingTop: 15,
             justifyContent: 'center',
-            alignItems:'center',
+            alignItems: 'center',
             flexDirection: 'column',
             rowGap: 15,
             paddingBottom: 80,
-            width:"100%"
+            width: "100%"
         },
         description: {
             fontSize: 14,
@@ -188,8 +184,24 @@ const styles = StyleSheet.create(
             height: 20,
 
         },
+        rowBox: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'stretch',
+            paddingLeft: 5,
+            width: 323,
+
+        },
+        label: {
+            color: '#391713',
+            fontFamily: 'LeagueSpartanMedium',
+            fontSize: 20,
+        },
+        downArrow: {
+            transform: [{ rotate: '-90deg' }]
+        },
 
     }
 )
 
-export default ContactUsPage;
+export default SettingsPage;

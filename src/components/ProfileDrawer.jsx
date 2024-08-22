@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions, StatusBar } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { useFonts } from 'expo-font';
 import OrderIcon from '../../assets/Icons/orderIcon.svg';
@@ -11,6 +11,7 @@ import CardIcon from '../../assets/Icons/Card icon.svg';
 import SettingIcon from '../../assets/Icons/settingIcon.svg';
 import LogoutIcon from '../../assets/Icons/logoutIcon.svg';
 import { useNavigation } from '@react-navigation/native';
+import LogoutModal from './LogoutModal';
 
 
 
@@ -29,16 +30,21 @@ export default function CustomDrawerContent(props) {
     LeagueSpartanblack: require('../../assets/fonts/League Spartan Black.ttf'),
     LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
 
-  })
+  });
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+
+
   const drawerItems = [
     { label: "My Orders", icon: <OrderIcon width={22} height={26} />, onPress: () => { navigation.navigate('MyOrders') } },
     { label: "My Profile", icon: <ProfileIcon width={22} height={26} />, onPress: () => { navigation.navigate('MyProfile') } },
-    { label: "Delivery Address", icon: <LocationIcon width={22} height={26} />, onPress: () => {navigation.navigate('DeliveryAddress') } },
-    { label: "Payment Methods", icon: <CardIcon width={22} height={26} />, onPress: () => {navigation.navigate('PaymentMethods') } },
-    { label: "Contact Us", icon: <CallIcon width={22} height={26} />, onPress: () => {navigation.navigate('ContactUs') } },
-    { label: "Help & FAQs", icon: <ChatIcon width={22} height={26} />, onPress: () => { navigation.navigate('Help&FAQs')} },
-    { label: "Settings", icon: <SettingIcon width={22} height={26} />, onPress: () => { } },
-    { label: "Log Out", icon: <LogoutIcon width={22} height={26} />, onPress: () => { } },
+    { label: "Delivery Address", icon: <LocationIcon width={22} height={26} />, onPress: () => { navigation.navigate('DeliveryAddress') } },
+    { label: "Payment Methods", icon: <CardIcon width={22} height={26} />, onPress: () => { navigation.navigate('PaymentMethods') } },
+    { label: "Contact Us", icon: <CallIcon width={22} height={26} />, onPress: () => { navigation.navigate('ContactUs') } },
+    { label: "Help & FAQs", icon: <ChatIcon width={22} height={26} />, onPress: () => { navigation.navigate('Help&FAQs') } },
+    { label: "Settings", icon: <SettingIcon width={22} height={26} />, onPress: () => { navigation.navigate('Settings') } },
+    { label: "Log Out", icon: <LogoutIcon width={22} height={26} />, onPress: () => { setModalVisible(true) } },
   ];
 
   if (!loaded) {
@@ -47,6 +53,7 @@ export default function CustomDrawerContent(props) {
 
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={styles.container}>
+      <LogoutModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
       <View style={styles.profileSection}>
         <Image source={require("../../assets/profile.png")} style={styles.profilePic} />
         <View>
