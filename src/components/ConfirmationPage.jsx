@@ -5,7 +5,7 @@ import BackArrow from '../../assets/Icons/backarrow.svg';
 import CircleIcon from '../../assets/Icons/CircleIcon.svg';
 import CancelIcon from '../../assets/Icons/CancelIcon.svg'; // Replace this with your actual done icon
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const ConfirmationPage = ({ route, navigation }) => {
     const [loadingComplete, setLoadingComplete] = useState(false);
@@ -65,41 +65,40 @@ const ConfirmationPage = ({ route, navigation }) => {
         <>
             <View style={styles.header}>
                 <View style={styles.headerText}>
-                    <TouchableOpacity  style={{padding:5, marginLeft:-5}} onPress={()=>navigation.goBack()}>
+                    <TouchableOpacity style={{ padding: 5, marginLeft: -5 }} onPress={() => navigation.goBack()}>
                         <BackArrow />
                     </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-
-                        {!loadingComplete ? (<>
-                            <View style={{ position: "absolute", }}>
-                                <CircleIcon width={139} height={139} strokeWidth={0.5} />
-                            </View>
-
-
-                            <View style={{ flexDirection: "row", columnGap: 10 }}>
-                                <Animated.View style={{ opacity: opacity1 }}>
-                                    <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
-                                </Animated.View>
-                                <Animated.View style={{ opacity: opacity2 }}>
-                                    <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
-                                </Animated.View>
-                                <Animated.View style={{ opacity: opacity3 }}>
-                                    <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
-                                </Animated.View>
-                            </View>
-                        </>
-                        ) : (
-                            <CancelIcon width={139} height={139} strokeWidth={0.5} />
-                        )}
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <View>
+                        {
+                            !loadingComplete ? (
+                                <>
+                                    <View style={{ position: "relative" }}>
+                                        <CircleIcon width={139} height={139} strokeWidth={0.5} />
+                                        <View style={{ flexDirection: "row", columnGap: 10, position: 'absolute', top: 60, left: 30 }}>
+                                            <Animated.View style={{ opacity: opacity1 }}>
+                                                <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                            </Animated.View>
+                                            <Animated.View style={{ opacity: opacity2 }}>
+                                                <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                            </Animated.View>
+                                            <Animated.View style={{ opacity: opacity3 }}>
+                                                <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                            </Animated.View>
+                                        </View>
+                                    </View>
+                                </>
+                            ) : (
+                                <CancelIcon width={139} height={139} strokeWidth={0.5} />
+                            )}
                     </View>
                     <View style={styles.textContainer}>
                         <Text style={styles.login}>¡Order Cancelled!</Text>
                         <Text style={styles.description}>Your order has been successfully cancelled</Text>
                     </View>
-                    <Text style={styles.bottomText}>If you have any questions, reach directly to our customer support</Text>
                 </View>
+                <Text style={styles.bottomText}>If you have any questions, reach directly to our customer support</Text>
             </View>
 
         </>
@@ -108,10 +107,13 @@ const ConfirmationPage = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     header: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: '#F5CB58',
         padding: 30,
         paddingTop: 50,
+        height: height,
+        flexDirection: 'column',
+        rowGap: 50
     },
     headerText: {
         flexDirection: 'row',
@@ -119,15 +121,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         columnGap: 60,
         marginTop: 20,
+        width: width
     },
     textContainer: {
-        flex: 1,
         justifyContent: 'flex-start',
         alignItems: "center",
         flexDirection: "column",
         rowGap: 5,
-        marginTop: -70,
-        width: "80%"
+        marginTop: 30,
+        width: "80%",
     },
     login: {
         fontSize: 24,
@@ -146,10 +148,9 @@ const styles = StyleSheet.create({
     bottomText: {
         fontSize: 16,
         fontFamily: 'LeagueSpartanMedium',
-        position: 'absolute',
-        bottom: 50,
         color: '#391713',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: height * 0.2
     }
 });
 

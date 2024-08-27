@@ -211,8 +211,6 @@ const styles = StyleSheet.create(
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: 10,
-            // backgroundColor: '#F54A0D',
-            // borderRadius: 10,
             width: width * 0.93
         },
         totals: {
@@ -232,8 +230,8 @@ const styles = StyleSheet.create(
             alignItems: 'center',
         },
         loginButtonText: {
-            fontSize: 17,
-            fontFamily: 'LeagueSpartanMedium',
+            fontSize: 23,
+            fontFamily: 'LeagueSpartanRegular',
             paddingVertical: 1,
             width: "100%",
             height: '50%',

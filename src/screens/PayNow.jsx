@@ -5,7 +5,7 @@ import BackArrow from '../../assets/Icons/backarrow.svg'
 import { useFonts } from 'expo-font';
 import { Button, IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import CartItem from '../components/CartItem';
+import CardIcon from '../../assets/Icons/Card icon.svg'
 
 
 const { width, height } = Dimensions.get('window');
@@ -14,19 +14,8 @@ const { width, height } = Dimensions.get('window');
 const PayNowPage = ({ route }) => {
     const navigation = useNavigation();
 
-    const { orderItems, total,shippingAddress } = route.params;
-   
-    // const calculateSubtotal = () => {
-    //     const result = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    //     setSubTotal(result);
-    // };
+    const { orderItems, totalAmount, shippingAddress } = route.params;
 
-
-    // const calculateTotal = () => {
-    //     const result = subTotal + taxAndFees + delivery;
-    //     setTotalAmount(result);
-
-    // };
 
     const [loaded] = useFonts({
         LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
@@ -57,7 +46,7 @@ const PayNowPage = ({ route }) => {
                 <Card style={styles.card}>
                     <View style={styles.cardContainer}>
                         <View style={styles.drawerItems}>
-                            <View style={{ flexDirection: "column", paddingHorizontal: 15, rowGap: 10, marginBottom:10 }}>
+                            <View style={{ flexDirection: "column", paddingHorizontal: 15, rowGap: 10, marginBottom: 10 }}>
                                 <Text style={styles.shippingtext}>Shipping Address</Text>
                                 <TextInput
                                     style={styles.input}
@@ -65,21 +54,68 @@ const PayNowPage = ({ route }) => {
                                     placeholderTextColor="#391713"
                                     value={shippingAddress}
                                 />
-                                <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20, color:'#391713'}}>Order Summary</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20, color: '#391713' }}>Order Summary</Text>
                                     <TouchableOpacity style={styles.cancelButton}>
                                         <Text style={styles.cancelButtonText}>Edit</Text>
                                     </TouchableOpacity>
                                 </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <View style={{ flexDirection: 'column' }}>
+                                        {orderItems.map(item => (
+                                            <View style={{ flexDirection: 'row', columnGap: 10 }}>
+                                                <Text style={{ fontFamily: "LeagueSpartanLight", fontSize: 14 }}>{item.name}</Text>
+                                                <Text style={{ fontFamily: "LeagueSpartanLight", fontSize: 14, color: '#E95322' }}>{item.quantity}Items</Text>
+                                            </View>
+                                        ))}
+                                    </View>
+                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20 }}>${totalAmount}.00</Text>
+                                </View>
+                                <View
+                                    style={{
+                                        width: '100%',
+                                        backgroundColor: '#FFD8C7',
+                                        height: 1,
+                                        marginLeft: 0,
+                                    }}
+                                />
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20, color: '#391713' }}>Payment Method</Text>
+                                    <TouchableOpacity style={styles.cancelButton}>
+                                        <Text style={styles.cancelButtonText}>Edit</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <View style={{ flexDirection: 'row', columnGap: 5 }}>
+                                        <CardIcon width={31} height={21} />
+                                        <Text>Credit Card</Text>
+                                    </View>
+                                    <Text style={styles.inputCard}>*** *** *** 43 /00 /000</Text>
+                                </View>
+                                <View
+                                    style={{
+                                        width: '100%',
+                                        backgroundColor: '#FFD8C7',
+                                        height: 1,
+                                        marginLeft: 0,
+                                    }}
+                                />
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20, color: '#391713' }}>Delivery Time</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <Text>Estimated Delivery</Text>
+                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20, color: '#E95322' }}>25 mins</Text>
+                                </View>
+                                <View
+                                    style={{
+                                        width: '100%',
+                                        backgroundColor: '#FFD8C7',
+                                        height: 1,
+                                        marginLeft: 0,
+                                    }}
+                                />
                             </View>
-                            <View
-                                style={{
-                                    width: '90%',
-                                    backgroundColor: '#FFD8C7',
-                                    height: 1,
-                                    marginLeft: 20,
-                                }}
-                            />
                         </View>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button
@@ -88,7 +124,7 @@ const PayNowPage = ({ route }) => {
                                 style={styles.loginButton}
                                 labelStyle={styles.loginButtonText}
                             >
-                                Place Order
+                                Pay Now
                             </Button>
                         </View>
                     </View>
@@ -111,7 +147,7 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'center',
-            columnGap: 60
+            columnGap: 90
         }
         ,
         signup: {
@@ -155,6 +191,18 @@ const styles = StyleSheet.create(
             marginBottom: 20,
             backgroundColor: '#F3E9B5',
         },
+        inputCard: {
+            height: 20,
+            // width:155,
+            borderColor: '#8b4513',
+            // borderWidth: 1,
+            borderRadius: 20,
+            backgroundColor: '#F3E9B5',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingHorizontal: 10,
+            paddingVertical: 2,
+        },
         totalsContainer: {
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -173,16 +221,16 @@ const styles = StyleSheet.create(
         loginButton: {
             backgroundColor: '#FFDECF',
             borderRadius: 30,
-            width: 157,
+            width: 150,
             height: 38,
-            marginTop: 10,
+            marginTop: 50,
             marginBottom: 4,
             justifyContent: 'center',
             alignItems: 'center',
         },
         loginButtonText: {
-            fontSize: 17,
-            fontFamily: 'LeagueSpartanMedium',
+            fontSize: 23,
+            fontFamily: 'LeagueSpartanRegular',
             paddingVertical: 1,
             width: "100%",
             height: '50%',
@@ -195,7 +243,7 @@ const styles = StyleSheet.create(
             borderRadius: 20,
             width: 58,
             alignItems: 'center',
-            justifyContent:'center'
+            justifyContent: 'center'
         },
         cancelButtonText: {
             color: '#fff',
