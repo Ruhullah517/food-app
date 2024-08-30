@@ -23,24 +23,34 @@ const { width, height } = Dimensions.get('window');
 
 const data = [
     {
-        title: "Page 1",
-        description: "Experience our delicious new dish",
-        discount: "30% OFF",
-        image: require("../../assets/a71428bad6f8180bac9ad440a389a541.png")
+        title: "Pizza with Pepperoni and Cheese",
+        descountText: "Experience our delicious new dish",
+        discount: 30,
+        image: require("../../assets/a71428bad6f8180bac9ad440a389a541.png"),
+        price: 20,
+        ratings: 5,
+        descriptionHead: "Lorem ipsum dolor sit amet",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
     },
     {
-        title: "Page 2 ",
-        description: "Experience our delicious new dish",
-        discount: "30% OFF",
-        image: require("../../assets/10dbbfa35444d8a696a8e628115ab848.png")
-
+        title: "Pizza with Pepperoni",
+        descountText: "Experience our delicious new dish",
+        discount: 20,
+        image: require("../../assets/10dbbfa35444d8a696a8e628115ab848.png"),
+        price: 15,
+        ratings: 5,
+        descriptionHead: "Lorem ipsum dolor sit amet",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
     },
     {
-        title: "Page 3",
-        description: "Experience our delicious new dish",
-        discount: "30% OFF",
-        image: require("../../assets/a71428bad6f8180bac9ad440a389a541.png")
-
+        title: "Pizza",
+        descountText: "Experience our delicious new dish",
+        discount: 10,
+        image: require("../../assets/a71428bad6f8180bac9ad440a389a541.png"),
+        price: 15,
+        ratings: 5,
+        descriptionHead: "Lorem ipsum dolor sit amet",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
     }
 ];
 const recommend = [
@@ -206,17 +216,17 @@ const HomePage = () => {
                             showsHorizontalScrollIndicator={false}
                         >
                             {data.map((item, index) => (
-                                <View key={index} style={styles.discountCard}>
+                                <TouchableOpacity key={index} style={styles.discountCard} onPress={() => navigation.navigate('FoodDetail', { item: item, advertisement: true })}>
                                     <Ellipse width={55} height={55} style={styles.ellipse} />
                                     <Ellipse width={46} height={46} style={styles.ellipse2} />
                                     <View style={styles.textContainer}>
 
-                                        <Text style={styles.discountDescription}>{item.description}</Text>
-                                        <Text style={styles.discount}>{item.discount}</Text>
+                                        <Text style={styles.discountDescription}>{item.descountText}</Text>
+                                        <Text style={styles.discount}>{item.discount}% OFF</Text>
 
                                     </View>
                                     <Image source={item.image} style={styles.image} />
-                                </View>
+                                </TouchableOpacity>
                             ))}
                         </ScrollView>
                         <View style={styles.pagination}>

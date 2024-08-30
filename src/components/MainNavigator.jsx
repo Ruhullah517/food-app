@@ -32,6 +32,7 @@ import FilterPage from '../screens/Filter';
 import FoodDetailPage from './FoodDetail';
 import BestSellerPage from '../screens/BestSellerPage';
 
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 

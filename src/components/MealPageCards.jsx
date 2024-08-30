@@ -25,88 +25,107 @@ const MealsPageCards = ({ selectedCategory }) => {
         {
             id: 1,
             title: "Mexican Appetitzer",
-            description: 'Tortilla Chips With Toppins',
+            descriptionHead: 'Tortilla Chips With Toppins',
             ratings: 5,
             price: 30,
-            image: require('../../assets/chola.png')
+            image: require('../../assets/chola.png'),
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
         },
         {
             id: 2,
             title: "Skewer",
-            description: 'Marinated in a rich blend of herbs and spices, then grilled to perfection, served with a side of zesty dipping sauce.',
+            descriptionHead: 'Tortilla Chips With Toppins',
             ratings: 4,
             price: 50,
-            image: require('../../assets/skewer.png')
+            image: require('../../assets/skewer.png'),
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+
         }
     ];
     const meals = [{
         id: 1,
         title: "Fresh Prawn Ceviche",
-        description: 'Shrimp marinated in zesty lime juice, mixed with crisp onions, tomatoes, and cilantro',
+        descriptionHead: 'Tortilla Chips With Toppins',
         ratings: 5,
         price: 40,
-        image: require('../../assets/meals1.png')
+        image: require('../../assets/meals1.png'),
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+
     },
     {
         id: 2,
         title: "Skewer",
-        description: 'Marinated in a rich blend of herbs and spices, then grilled to perfection, served with a side of zesty dipping sauce.',
+        descriptionHead: 'Tortilla Chips With Toppins',
         ratings: 5,
         price: 20,
-        image: require('../../assets/skewer.png')
+        image: require('../../assets/skewer.png'),
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+
     }
     ];
     const vegan = [
         {
             id: 1,
             title: "Mexican Appetitzer",
-            description: 'Tortilla Chips With Toppins',
+            descriptionHead: 'Tortilla Chips With Toppins',
             ratings: 5,
             price: 14,
-            image: require('../../assets/chola.png')
+            image: require('../../assets/chola.png'),
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+
         },
         {
             id: 2,
             title: "Skewer",
-            description: 'Marinated in a rich blend of herbs and spices, then grilled to perfection, served with a side of zesty dipping sauce.',
+            descriptionHead: 'Tortilla Chips With Toppins',
             ratings: 5,
             price: 15,
-            image: require('../../assets/skewer.png')
+            image: require('../../assets/skewer.png'),
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+
         }
     ];
     const dessert = [{
         id: 1,
         title: "Fresh Prawn Ceviche",
-        description: 'Shrimp marinated in zesty lime juice, mixed with crisp onions, tomatoes, and cilantro',
+        descriptionHead: 'Tortilla Chips With Toppins',
         ratings: 5,
         price: 15,
-        image: require('../../assets/meals1.png')
+        image: require('../../assets/meals1.png'),
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+
     },
     {
         id: 2,
         title: "Skewer",
-        description: 'Marinated in a rich blend of herbs and spices, then grilled to perfection, served with a side of zesty dipping sauce.',
+        descriptionHead: 'Tortilla Chips With Toppins',
         ratings: 5,
         price: 15,
-        image: require('../../assets/skewer.png')
+        image: require('../../assets/skewer.png'),
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+
     }
     ];
     const drinks = [
         {
             id: 1,
             title: "Mexican Appetitzer",
-            description: 'Tortilla Chips With Toppins',
+            descriptionHead: 'Tortilla Chips With Toppins',
             ratings: 5,
             price: 15,
-            image: require('../../assets/chola.png')
+            image: require('../../assets/chola.png'),
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+
         },
         {
             id: 2,
             title: "Skewer",
-            description: 'Marinated in a rich blend of herbs and spices, then grilled to perfection, served with a side of zesty dipping sauce.',
+            descriptionHead: 'Tortilla Chips With Toppins',
             ratings: 4,
             price: 15,
-            image: require('../../assets/skewer.png')
+            image: require('../../assets/skewer.png'),
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+
         }
     ];
 
@@ -132,7 +151,7 @@ const MealsPageCards = ({ selectedCategory }) => {
                                     </View>
                                     <Text style={styles.price}>${item.price.toFixed(2)}</Text>
                                 </View>
-                                <Text style={styles.description}>{item.description}</Text>
+                                <Text style={styles.description}>{item.descriptionHead}</Text>
                             </View>
                         </View>
                     </TouchableOpacity>

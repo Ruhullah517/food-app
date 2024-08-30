@@ -11,6 +11,7 @@ import PlusIcon from '../../assets/Icons/plusIconWhite.svg';
 import MinusIcon from '../../assets/Icons/minusIconWhite.svg';
 import CircleIcon from '../../assets/Icons/CircleIcon.svg';
 import CartIcon from '../../assets/Icons/addCart.svg';
+import Star1 from '../../assets/Icons/Star 1.svg';
 
 
 const { width, height } = Dimensions.get('window');
@@ -18,7 +19,7 @@ const { width, height } = Dimensions.get('window');
 
 const FoodDetailPage = ({ route }) => {
     const navigation = useNavigation();
-    const { item } = route.params;
+    const { item, advertisement } = route.params;
     const [quantity, setQuantity] = useState(1);
     const [selectedToppings, setSelectedToppings] = useState();
     const handleIncreament = () => {
@@ -61,31 +62,56 @@ const FoodDetailPage = ({ route }) => {
         <ScrollView >
             <View style={styles.header}>
                 <View style={styles.headerText}>
-                    <TouchableOpacity style={{ padding: 5, marginLeft: -5 }} onPress={() => navigation.goBack()}>
-                        <BackArrow />
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: "90%" }}>
-                        <View style={{ flexDirection: 'column' }}>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 10 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'flex-start', columnGap: 1 }}>
+                        <TouchableOpacity style={{ padding: 5, marginLeft: -5 }} onPress={() => navigation.goBack()}>
+                            <BackArrow />
+                        </TouchableOpacity>
+                        <View style={{ flexDirection: 'column', rowGap: 3 }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 4 }}>
                                 <Text style={styles.signup}>{item.title}</Text>
                                 <View style={{ backgroundColor: '#E95322', width: 5, height: 5, borderRadius: 20 }}>
                                 </View>
                             </View>
                             <View style={styles.ratingContainer}>
-                                <Text style={styles.rating}>5.0<StarIcon /></Text>
+                                <Text style={styles.rating}>{item.ratings.toFixed(1)}<StarIcon /></Text>
                             </View>
                         </View>
-                        <View style={{ backgroundColor: '#E95322', width: 21, height: 21, borderRadius: 30, alignItems: 'center', justifyContent: 'center' }}>
-                            <LikeIcon width={9} height={8} />
-                        </View>
+                    </View>
+
+                    <View style={{ backgroundColor: '#E95322', width: 21, height: 21, borderRadius: 30, alignItems: 'center', justifyContent: 'center' }}>
+                        <LikeIcon width={9} height={8} />
                     </View>
                 </View>
 
                 <Card style={styles.card}>
                     <View style={styles.container}>
+                        {advertisement ?
+                            <View style={styles.discountContainer}>
+                                <View style={{ position: 'relative' }}>
+                                    <Star1 width={71} height={71} />
+                                    <Text style={styles.discountText}>-{item.discount}%</Text>
+                                </View>
+                            </View>
+                            :
+                            null
+                        }
                         <Image source={item.image} style={styles.mealsImage} />
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: "100%" }}>
-                            <Text style={{ fontFamily: 'LeagueSpartanBold', fontSize: 24, color: '#E95322' }}>$50.00</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: "100%", alignItems: 'center' }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 5 }}>
+
+                                {advertisement ?
+                                    <>
+                                        <Text style={{ fontFamily: 'LeagueSpartanBold', fontSize: 24, color: '#E95322' }}>${(item.price - (item.price * (item.discount / 100))).toFixed(2)}</Text>
+                                        <View style={{ position: 'relative' }}>
+                                            <View style={{ width: 52, height: 1, backgroundColor: '#E95322', position: 'absolute', top: 12, zIndex: 1 }}></View>
+                                            <Text style={{ fontFamily: 'LeagueSpartanBold', fontSize: 15, color: '#F5CB58' }}>${item.price.toFixed(2)}</Text>
+                                        </View>
+                                    </>
+
+                                    :
+                                    <Text style={{ fontFamily: 'LeagueSpartanBold', fontSize: 24, color: '#E95322' }}>${item.price.toFixed(2)}</Text>
+                                }
+                            </View>
                             <View style={{ flexDirection: 'row', columnGap: 5, alignItems: 'center' }}>
                                 <TouchableOpacity style={quantity > 1 ? styles.quantityIconBack : styles.quantityIconBackUnActive} onPress={handleDecreament}>
                                     <MinusIcon />
@@ -98,16 +124,16 @@ const FoodDetailPage = ({ route }) => {
                         </View>
                         <View style={styles.divider}></View>
                         <View>
-                            <Text style={styles.descriptionHead}>Tortilla Chips With Toppins</Text>
-                            <Text style={styles.description}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</Text>
+                            <Text style={styles.descriptionHead}>{item.descriptionHead}</Text>
+                            <Text style={styles.description}>{item.description}</Text>
                         </View>
                         <View>
                             <Text style={{ fontFamily: "LeagueSpartanMedium", fontSize: 20 }}>Toppings</Text>
                             {toppings.map(item => (
-                                <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between', width: "100%", alignItems:'center' }}>
+                                <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between', width: "100%", alignItems: 'center' }}>
                                     <Text style={{ fontFamily: "LeagueSpartanLight" }}>{item.title}</Text>
                                     <Text style={{ fontFamily: "LeagueSpartanLight", color: "#FFD8C7" }}>------------------------------</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center' }}>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <Text style={{ fontFamily: "LeagueSpartanLight", marginRight: 10 }}>{item.price}</Text>
                                         <TouchableOpacity
                                             onPress={() => handleCheckboxPress(item.id)}
@@ -133,7 +159,7 @@ const FoodDetailPage = ({ route }) => {
                             ))}
 
                         </View>
-                        <View style={{ alignItems: "center", marginTop:10}}>
+                        <View style={{ alignItems: "center", marginTop: 10 }}>
                             <TouchableOpacity style={styles.submitButton} onPress={addToCart} >
                                 <CartIcon width={16} height={18} />
                                 <Text style={styles.submitButtonText}>Add to Cart</Text>
@@ -154,14 +180,15 @@ const styles = StyleSheet.create(
     {
         header: {
             backgroundColor: '#F5CB58',
-            padding: 30,
+            padding: 25,
             paddingTop: 80,
         },
         headerText: {
             flexDirection: 'row',
-            justifyContent: 'flex-start',
+            justifyContent: 'space-between',
             alignItems: 'flex-start',
-            columnGap: 5,
+            // backgroundColor: '#9999',
+            columnGap: 3
         }
         ,
         signup: {
@@ -178,7 +205,8 @@ const styles = StyleSheet.create(
             // width: 34,
             // height:14,
             justifyContent: 'center',
-            width: 34
+            width: 34,
+            // marginLeft: 10
         },
         rating: {
             fontSize: 12,
@@ -207,12 +235,28 @@ const styles = StyleSheet.create(
         container: {
             width: 310,
             // justifyContent:'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            position: 'relative'
         },
         mealsImage: {
             width: "100%",
             height: 229,
             borderRadius: 36,
+        },
+        discountContainer: {
+            position: 'absolute',
+            zIndex: 1,
+            right: -20,
+            top: -20
+        },
+        discountText: {
+            color: "#fff",
+            position: 'absolute',
+            top: 20,
+            left: 13,
+            fontFamily: "LeagueSpartanBold",
+            fontSize: 20,
+            textAlign: 'center'
         },
         quantityIconBack: {
             backgroundColor: '#E95322',
