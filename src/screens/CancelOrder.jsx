@@ -67,56 +67,56 @@ const CancelOrderPage = ({ route, navigation }) => {
             <ScrollView showsVerticalScrollIndicator={true}>
                 <View style={styles.header}>
                     <View style={styles.headerText}>
-                        <TouchableOpacity style={{padding:5, marginLeft:-5}} onPress={() => navigation.goBack()}>
-                        <BackArrow />
-                    </TouchableOpacity>
-                    <Text style={styles.login}>Cancel Order</Text>
-                </View>
+                        <TouchableOpacity style={{ padding: 5, marginLeft: -5 }} onPress={() => navigation.goBack()}>
+                            <BackArrow />
+                        </TouchableOpacity>
+                        <Text style={styles.login}>Cancel Order</Text>
+                    </View>
 
-                <Card style={styles.card}>
-                    <View style={styles.container}>
-                        <Text style={styles.descriptionText}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pellentesque congue lorem, vel tincidunt tortor.
-                        </Text>
-                        {reasons.map(reason => (
-                            <View key={reason.id} style={styles.reasonContainer}>
-                                <Text style={styles.reasonText}>{reason.label}</Text>
-                                <TouchableOpacity
-                                    onPress={() => handleCheckboxPress(reason.id)}
-                                    style={{
-                                        borderColor: "#FF5722",
-                                        padding: 2,
-                                        borderRadius: 20,
-                                        borderWidth: 1,
-                                        backgroundColor: '#FFFFFF'
-                                    }}
-                                >
-                                    <CircleIcon
-                                        color='#FF5722'
-                                        fill={reason.checked ? '#FF5722' : '#FFFFFF'}
-                                    />
+                    <Card style={styles.card}>
+                        <View style={styles.container}>
+                            <Text style={styles.descriptionText}>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pellentesque congue lorem, vel tincidunt tortor.
+                            </Text>
+                            {reasons.map(reason => (
+                                <View key={reason.id} style={styles.reasonContainer}>
+                                    <Text style={styles.reasonText}>{reason.label}</Text>
+                                    <TouchableOpacity
+                                        onPress={() => handleCheckboxPress(reason.id)}
+                                        style={{
+                                            borderColor: "#FF5722",
+                                            padding: 2,
+                                            borderRadius: 20,
+                                            borderWidth: 1,
+                                            backgroundColor: '#FFFFFF'
+                                        }}
+                                    >
+                                        <CircleIcon
+                                            color='#FF5722'
+                                            fill={reason.checked ? '#FF5722' : '#FFFFFF'}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            ))}
+                            <View style={styles.otherContainer}>
+                                <Text style={styles.reasonText}>Others</Text>
+                                <TextInput
+                                    style={styles.textInput}
+                                    placeholder="Other reason..."
+                                    value={otherReason}
+                                    onChangeText={setOtherReason}
+                                    multiline
+                                />
+                            </View>
+                            <View style={{ alignItems: "center" }}>
+                                <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+                                    <Text style={styles.submitButtonText}>Submit</Text>
                                 </TouchableOpacity>
                             </View>
-                        ))}
-                        <View style={styles.otherContainer}>
-                            <Text style={styles.reasonText}>Others</Text>
-                            <TextInput
-                                style={styles.textInput}
-                                placeholder="Other reason..."
-                                value={otherReason}
-                                onChangeText={setOtherReason}
-                                multiline
-                            />
                         </View>
-                        <View style={{ alignItems: "center" }}>
-                            <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                                <Text style={styles.submitButtonText}>Submit</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Card>
-            </View>
-        </ScrollView >
+                    </Card>
+                </View>
+            </ScrollView >
         </>
     );
 };

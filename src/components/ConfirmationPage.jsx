@@ -4,10 +4,15 @@ import { View, Text, Animated, StyleSheet, Dimensions, TouchableOpacity } from '
 import BackArrow from '../../assets/Icons/backarrow.svg';
 import CircleIcon from '../../assets/Icons/CircleIcon.svg';
 import CancelIcon from '../../assets/Icons/CancelIcon.svg'; // Replace this with your actual done icon
+import DoneIcon from '../../assets/Icons/DoneIcon.svg';
 
 const { width, height } = Dimensions.get('window');
 
 const ConfirmationPage = ({ route, navigation }) => {
+    const { orderStatus, shippingAddress } = route.params;
+    console.log(orderStatus);
+
+
     const [loadingComplete, setLoadingComplete] = useState(false);
     const [loaded] = useFonts({
         LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
@@ -71,7 +76,28 @@ const ConfirmationPage = ({ route, navigation }) => {
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <View>
-                        {
+
+                        {orderStatus === 'completed' ? (
+                            !loadingComplete ? (
+                                <>
+                                    <View style={{ position: "relative" }}>
+                                        <CircleIcon width={139} height={139} strokeWidth={0.5} />
+                                        <View style={{ flexDirection: "row", columnGap: 10, position: 'absolute', top: 60, left: 30 }}>
+                                            <Animated.View style={{ opacity: opacity1 }}>
+                                                <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                            </Animated.View>
+                                            <Animated.View style={{ opacity: opacity2 }}>
+                                                <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                            </Animated.View>
+                                            <Animated.View style={{ opacity: opacity3 }}>
+                                                <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                            </Animated.View>
+                                        </View>
+                                    </View>
+                                </>
+                            ) : (
+                                <DoneIcon width={139} height={139} strokeWidth={0.5} />
+                            )) : (
                             !loadingComplete ? (
                                 <>
                                     <View style={{ position: "relative" }}>
@@ -91,11 +117,17 @@ const ConfirmationPage = ({ route, navigation }) => {
                                 </>
                             ) : (
                                 <CancelIcon width={139} height={139} strokeWidth={0.5} />
-                            )}
+                            )
+                        )}
+
                     </View>
                     <View style={styles.textContainer}>
-                        <Text style={styles.login}>¡Order Cancelled!</Text>
-                        <Text style={styles.description}>Your order has been successfully cancelled</Text>
+                        <Text style={styles.login}>¡Order Confirmed!</Text>
+                        <Text style={styles.description}>Your order has been placed successfully</Text>
+                        <Text style={styles.description}>Delivery by Thu, 29th, 4:00 PM</Text>
+                        <Text style={styles.trackOrder}
+                            onPress={() => navigation.navigate('TrackOrder', { shippingAddress })}
+                        >Track my order</Text>
                     </View>
                 </View>
                 <Text style={styles.bottomText}>If you have any questions, reach directly to our customer support</Text>
@@ -143,14 +175,19 @@ const styles = StyleSheet.create({
         fontFamily: 'LeagueSpartanMedium',
         fontSize: 16,
         textAlign: 'center',
-        color: "#391713"
+        color: "#391713",
     },
     bottomText: {
         fontSize: 16,
         fontFamily: 'LeagueSpartanMedium',
         color: '#391713',
         textAlign: 'center',
-        marginTop: height * 0.2
+        marginTop: height * 0.13
+    },
+    trackOrder: {
+        fontFamily: 'LeagueSpartanMedium',
+        fontSize: 20,
+        color: '#E95322'
     }
 });
 

@@ -71,9 +71,7 @@ export default function CartDrawer(props) {
       subtotal,
       taxAndFees,
       delivery,
-      total,
-      setCartItems,
-      updateQuantity
+      total
     };
     navigation.navigate('ConfirmOrder', { checkoutDetails });
   }

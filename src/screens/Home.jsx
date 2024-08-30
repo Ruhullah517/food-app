@@ -47,7 +47,7 @@ const recommend = [
     {
         image: require("../../assets/burger.png"),
         rating: '5.0',
-        StarIcon: <StarIcon/>,
+        StarIcon: <StarIcon />,
         price: '$10.00',
         alt: 'Delicious burger',
         heart: <Heart width={16} height={16} />
@@ -55,7 +55,7 @@ const recommend = [
     {
         image: require("../../assets/burger2.png"),
         rating: '5.0',
-        StarIcon: <StarIcon/>,
+        StarIcon: <StarIcon />,
         price: '$25.00',
         alt: 'Fresh spring rolls',
         heart: <Heart width={16} height={16} />
@@ -63,11 +63,10 @@ const recommend = [
 ];
 
 const HomePage = () => {
-const navigation = useNavigation();
-const { openProfileDrawer } = useContext(ProfileDrawerContext);
-const { openNotificationsDrawer } = useContext(NotificationsDrawerContext);
-const { openCartDrawer } = useContext(CartDrawerContext);
-
+    const navigation = useNavigation();
+    const { openProfileDrawer } = useContext(ProfileDrawerContext);
+    const { openNotificationsDrawer } = useContext(NotificationsDrawerContext);
+    const { openCartDrawer } = useContext(CartDrawerContext);
     const [currentPage, setCurrentPage] = useState(0);
 
     const handleScroll = (event) => {
@@ -98,7 +97,7 @@ const { openCartDrawer } = useContext(CartDrawerContext);
                             style={styles.searchBar}
                             placeholder="Search"
                         />
-                        <TouchableOpacity style={styles.searchIcon}>
+                        <TouchableOpacity style={styles.searchIcon} onPress={() => navigation.navigate('Filter')}>
                             <FilterIcon width={20} height={20} style={styles.icon} />
                         </TouchableOpacity>
                     </View>
@@ -113,7 +112,7 @@ const { openCartDrawer } = useContext(CartDrawerContext);
                                 <NotifyIcon width={16} height={16} style={styles.icon} />
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity  onPress={openProfileDrawer}>
+                        <TouchableOpacity onPress={openProfileDrawer}>
                             <View style={styles.iconBack}>
                                 <ProfileIcon width={16} height={16} style={styles.icon} />
                             </View>
@@ -127,30 +126,32 @@ const { openCartDrawer } = useContext(CartDrawerContext);
                     <View style={styles.categories}>
                         {[{
                             name: 'Snacks',
-                            icon: <SnackIcon width={49} height={62} style={styles.icon} />
+                            icon: <SnackIcon width={32} height={37} style={styles.icon} />
                         },
                         {
                             name: 'Meal',
-                            icon: <MealIcon width={49} height={62} style={styles.icon} />
+                            icon: <MealIcon width={17} height={37} style={styles.icon} />
 
                         },
                         {
                             name: 'Vegan',
-                            icon: <VeganIcon width={49} height={62} style={styles.icon} />
+                            icon: <VeganIcon width={37} height={37} style={styles.icon} />
 
                         },
                         {
                             name: 'Dessert',
-                            icon: <DessertIcon width={49} height={62} style={styles.icon} />
+                            icon: <DessertIcon width={29} height={37} style={styles.icon} />
 
                         },
                         {
                             name: 'Drinks',
-                            icon: <DrinksIcon width={49} height={62} style={styles.icon} />
+                            icon: <DrinksIcon width={21} height={37} style={styles.icon} />
 
                         }].map(category => (
                             <View key={category.name} style={styles.category}>
-                                {category.icon}
+                                <View style={styles.iconsBackGround}>
+                                    {category.icon}
+                                </View>
                                 <Text style={styles.categoryName}>{category.name}</Text>
                             </View>
                         ))}
@@ -159,7 +160,7 @@ const { openCartDrawer } = useContext(CartDrawerContext);
                     <View style={styles.section}>
                         <View style={styles.sectionHeader}>
                             <Text style={styles.sectionTitle}>Best Seller</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate('BestSeller')}>
                                 <Text style={styles.viewAll}>View All
                                     <Arrow name="navigate-next" size={15} color="#E95322" />
                                 </Text>
@@ -234,7 +235,7 @@ const { openCartDrawer } = useContext(CartDrawerContext);
                                         <View style={styles.reRating}>
                                             <Text style={styles.reRatingText}>{item.rating} {item.StarIcon}</Text>
                                         </View>
-                                        
+
                                         <Text style={styles.reRatingText}>{item.heart}</Text>
                                     </View>
                                     <View style={styles.rePriceTag}>
@@ -308,7 +309,7 @@ const styles = StyleSheet.create({
     },
     card: {
         width: width,
-        height:"100%",
+        height: "100%",
         alignSelf: 'center',
         marginTop: 10,
         borderTopLeftRadius: 30,
@@ -321,7 +322,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 5,
         bottom: 0,
-        paddingBottom:30
+        paddingBottom: 30
     }
     ,
     categories: {
@@ -330,7 +331,22 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         paddingHorizontal: 10,
     },
-
+    iconsBackGround: {
+        backgroundColor: '#F3E9B5',
+        width: 49,
+        height: 62,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 30
+    },
+    iconsBackGroundActive: {
+        backgroundColor: '#F5CB58',
+        width: 49,
+        height: 62,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 30
+    },
     category: {
         alignItems: 'center',
     },
@@ -516,21 +532,21 @@ const styles = StyleSheet.create({
         left: 12,
         flexDirection: 'row',
         columnGap: 5,
-        justifyContent:'center',
-        alignItems:'center',
-        
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
     reRating: {
         backgroundColor: '#FFFFFF',
         borderRadius: 30,
         paddingBottom: 1,
         paddingHorizontal: 2,
-        paddingTop:0,
-        justifyContent:'center',
+        paddingTop: 0,
+        justifyContent: 'center',
     },
     reRatingText: {
         color: '#391713',
-        fontSize:12,
+        fontSize: 12,
         fontFamily: "LeagueSpartanRegular"// Adjust color as needed
     },
     rePriceTag: {

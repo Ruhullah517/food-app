@@ -17,50 +17,10 @@ import Arrow from 'react-native-vector-icons/MaterialIcons';
 import StarIcon from '../../assets/Icons/StarIcon.svg'
 import { useNavigation } from '@react-navigation/native';
 import { ProfileDrawerContext, NotificationsDrawerContext, CartDrawerContext } from '../DrawerContext';
+import MealsPageCards from '../components/MealPageCards';
 
 
 const { width, height } = Dimensions.get('window');
-
-const data = [
-    {
-        title: "Page 1",
-        description: "Experience our delicious new dish",
-        discount: "30% OFF",
-        image: require("../../assets/a71428bad6f8180bac9ad440a389a541.png")
-    },
-    {
-        title: "Page 2 ",
-        description: "Experience our delicious new dish",
-        discount: "30% OFF",
-        image: require("../../assets/10dbbfa35444d8a696a8e628115ab848.png")
-
-    },
-    {
-        title: "Page 3",
-        description: "Experience our delicious new dish",
-        discount: "30% OFF",
-        image: require("../../assets/a71428bad6f8180bac9ad440a389a541.png")
-
-    }
-];
-const recommend = [
-    {
-        image: require("../../assets/burger.png"),
-        rating: '5.0',
-        StarIcon: <StarIcon />,
-        price: '$10.00',
-        alt: 'Delicious burger',
-        heart: <Heart width={16} height={16} />
-    },
-    {
-        image: require("../../assets/burger2.png"),
-        rating: '5.0',
-        StarIcon: <StarIcon />,
-        price: '$25.00',
-        alt: 'Fresh spring rolls',
-        heart: <Heart width={16} height={16} />
-    }
-];
 
 const MealsPage = () => {
     const navigation = useNavigation();
@@ -83,28 +43,13 @@ const MealsPage = () => {
         LeagueSpartanSemiBold: require('../../assets/fonts/League Spartan SemiBold.ttf'),
         LeagueSpartanblack: require('../../assets/fonts/League Spartan Black.ttf'),
         LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
+        PoppinsSemiBold: require('../../assets/fonts/Poppins SemiBold.ttf'),
+    });
 
-    })
-
-    const snacks = [
-        {
-            id: 1,
-            title: "Mexican Appetitzer",
-            description: 'Tortilla Chips With Toppins',
-            ratings: 5,
-            price: "15",
-            image: require('../../assets/chola.png')
-        },
-        {
-            id: 2,
-            title: "Mexican Appetitzer",
-            description: 'Tortilla Chips With Toppins',
-            ratings: 5,
-            price: "15",
-            image: require('../../assets/chola.png')
-        }
-    ]
-
+    const [selectedCategory, setSelectedCategory] = useState("Snacks");
+    const handleCategorySelection = (categoryName) => {
+        setSelectedCategory(categoryName);
+    };
 
     if (!loaded) {
         return null;
@@ -145,59 +90,53 @@ const MealsPage = () => {
                     <View style={styles.categories}>
                         {[{
                             name: 'Snacks',
-                            icon: <SnackIcon width={49} height={62} style={styles.icon} />
+                            icon: <SnackIcon width={32} height={37} style={styles.icon} />
                         },
                         {
                             name: 'Meal',
-                            icon: <MealIcon width={49} height={62} style={styles.icon} />
+                            icon: <MealIcon width={17} height={37} style={styles.icon} />
 
                         },
                         {
                             name: 'Vegan',
-                            icon: <VeganIcon width={49} height={62} style={styles.icon} />
+                            icon: <VeganIcon width={37} height={37} style={styles.icon} />
 
                         },
                         {
                             name: 'Dessert',
-                            icon: <DessertIcon width={49} height={62} style={styles.icon} />
+                            icon: <DessertIcon width={29} height={37} style={styles.icon} />
 
                         },
                         {
                             name: 'Drinks',
-                            icon: <DrinksIcon width={49} height={62} style={styles.icon} />
+                            icon: <DrinksIcon width={21} height={37} style={styles.icon} />
 
                         }].map(category => (
-                            <View key={category.name} style={styles.category}>
-                                {category.icon}
-                                <Text style={styles.categoryName}>{category.name}</Text>
+                            <View key={category.name} style={selectedCategory === category.name ? styles.categoryActive : styles.category}>
+                                <TouchableOpacity key={category.name} onPress={() => handleCategorySelection(category.name)}>
+                                    <View style={selectedCategory === category.name ? styles.iconsBackGroundActive : styles.iconsBackGround}>
+                                        {category.icon}
+                                    </View>
+                                    <Text style={styles.categoryName}>{category.name}</Text>
+                                    {selectedCategory === category.key && <View style={styles.connector} />}
+                                </TouchableOpacity>
                             </View>
                         ))}
                     </View>
 
                     <View style={styles.section}>
-                        {snacks.map((item) => (
-                            <View style={styles.mealsCard}>
-                                <Image source={item.image} style={styles.mealsImage} />
-                                <View style={styles.infoContainer}>
-                                    <View style={styles.titleRow}>
-                                        <Text style={styles.mealTitle}>{item.title}</Text>
-                                        <Text style={styles.description}>{item.description}</Text>
-                                    </View>
-                                    <View style={styles.ratingContainer}>
-                                        <Text style={styles.rating}></Text>
-                                    </View>
-                                    <Text style={styles.price}>${item.price}</Text>
-                                </View>
+                        <View>
+                            <View style={{ flexDirection: 'row', columnGap: 5 }}>
+                                <Text style={{ fontFamily: 'LeagueSpartanLight', fontSize: 12, color: '#070707' }}>Sort By</Text>
+                                <Text style={{ color: '#E95322', fontFamily: 'LeagueSpartanLight', fontSize: 12 }}>Popular</Text>
                             </View>
-                        )
-                        )}
-
+                            <TouchableOpacity style={styles.searchIcon} onPress={() => navigation.navigate('Filter')}>
+                                <FilterIcon width={20} height={20} style={styles.icon} />
+                            </TouchableOpacity>
+                        </View>
+                        <MealsPageCards selectedCategory={selectedCategory} />
                     </View>
-
-
-
                 </Card>
-
             </View>
         </ScrollView>
     </>
@@ -264,22 +203,61 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginVertical: 10,
-        paddingHorizontal: 10,
+        paddingHorizontal: 1,
+        marginBottom: -10
     },
-
     category: {
         alignItems: 'center',
+        width: 65,
+        marginBottom: -10,
+        paddingVertical: 10,
+
+    },
+    categoryActive: {
+        alignItems: 'center',
+        width: 65,
+        marginBottom: -10,
+        paddingVertical: 10,
+        backgroundColor: '#F5F5F5',
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        position: 'relative'
     },
     categoryName: {
         fontFamily: 'LeagueSpartanRegular',
         fontWeight: '400',
-        fontSize: 12
-    }
-    ,
+        fontSize: 12,
+        textAlign: 'center'
+    },
+    connector: {
+        position: 'absolute',
+        bottom: -20,
+        width: '100%',
+        height: 20,
+        backgroundColor: '#F5CB58',
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+    },
     categoryIcon: {
         width: 50,
         height: 50,
         marginBottom: 5,
+    },
+    iconsBackGround: {
+        backgroundColor: '#F3E9B5',
+        width: 49,
+        height: 62,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 30
+    },
+    iconsBackGroundActive: {
+        backgroundColor: '#F5CB58',
+        width: 49,
+        height: 62,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 30
     },
     section: {
         width: width,
@@ -288,17 +266,17 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         padding: 20,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#F5F5F5',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        elevation: 5,
+        // shadowOpacity: 0.8,
+        // shadowRadius: 2,
+        // elevation: 5,
         bottom: 0,
         paddingBottom: 30
     },
     mealsCard: {
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
         borderRadius: 15,
         marginVertical: 20,
         flexDirection: 'column',
@@ -312,7 +290,6 @@ const styles = StyleSheet.create({
     infoContainer: {
         flex: 1,
         flexDirection: 'row',
-        columnGap: 20
     },
     titleRow: {
         flexDirection: 'column',
@@ -321,25 +298,36 @@ const styles = StyleSheet.create({
     },
     mealTitle: {
         fontSize: 18,
-        fontFamily: 'LeagueSpartanSemiBold'
+        fontFamily: 'PoppinsSemiBold',
+        color: '#391713'
     },
     ratingContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor: '#E95322',
+        borderRadius: 10,
+        // width: 34,
+        // height:14,
+        justifyContent: 'center',
+        paddingHorizontal: 4
     },
     rating: {
-        fontSize: 14,
-        color: 'orange',
+        fontSize: 12,
         marginRight: 5,
+        color: '#F5F5F5',
+        textAlign: 'center',
+        fontFamily: 'LeagueSpartanRegular'
     },
     description: {
         fontSize: 12,
         color: '#666',
-        marginVertical: 5,
+        fontFamily: 'LeagueSpartanLight',
+        marginTop: -10,
+        width: 231
     },
     price: {
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 18,
+        fontFamily: "LeagueSpartanRegular",
         color: '#E91E63',
         textAlign: 'right',
     }

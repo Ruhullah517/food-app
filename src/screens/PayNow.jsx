@@ -13,10 +13,7 @@ const { width, height } = Dimensions.get('window');
 
 const PayNowPage = ({ route }) => {
     const navigation = useNavigation();
-
     const { orderItems, totalAmount, shippingAddress } = route.params;
-
-
     const [loaded] = useFonts({
         LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
         LeagueSpartanBold: require('../../assets/fonts/League Spartan Bold.ttf'),
@@ -26,9 +23,6 @@ const PayNowPage = ({ route }) => {
         LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
 
     });
-
-
-
 
     if (!loaded) {
         return null;
@@ -50,7 +44,7 @@ const PayNowPage = ({ route }) => {
                                 <Text style={styles.shippingtext}>Shipping Address</Text>
                                 <TextInput
                                     style={styles.input}
-                                    placeholder="778 Locust View Drive Oaklanda, CA"
+                                    // placeholder="778 Locust View Drive Oaklanda, CA"
                                     placeholderTextColor="#391713"
                                     value={shippingAddress}
                                 />
@@ -120,7 +114,7 @@ const PayNowPage = ({ route }) => {
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button
                                 mode="contained"
-                                onPress={() => { }}
+                                onPress={() => { navigation.navigate('ConfirmationPage', { orderStatus: "completed", shippingAddress }) }}
                                 style={styles.loginButton}
                                 labelStyle={styles.loginButtonText}
                             >

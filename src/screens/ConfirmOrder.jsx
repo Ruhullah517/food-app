@@ -19,7 +19,7 @@ const ConfirmOrderPage = ({ route }) => {
     const [orderItems, setOrderItems] = useState(cartItems);
     const [subTotal, setSubTotal] = useState(subtotal);
     const [totalAmount, setTotalAmount] = useState(total);
-    const [shippingAddress, setShippingAddress] = useState('');
+    const [shippingAddress, setShippingAddress] = useState('778 Locust View Drive Oaklanda, CA');
     const updateQuantity = (index, newQuantity) => {
         const updatedItems = [...orderItems];
         updatedItems[index].quantity = newQuantity;
@@ -38,6 +38,10 @@ const ConfirmOrderPage = ({ route }) => {
         setTotalAmount(result);
 
     };
+
+    const handlePlaceOrder = () => {
+        navigation.navigate('Payment', { orderItems, totalAmount, shippingAddress });
+    }
 
     const [loaded] = useFonts({
         LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
@@ -68,17 +72,17 @@ const ConfirmOrderPage = ({ route }) => {
                 <Card style={styles.card}>
                     <View style={styles.cardContainer}>
                         <View style={styles.drawerItems}>
-                            <View style={{ flexDirection: "column", paddingHorizontal: 15, rowGap: 10, marginBottom:10 }}>
+                            <View style={{ flexDirection: "column", paddingHorizontal: 15, rowGap: 10, marginBottom: 10 }}>
                                 <Text style={styles.shippingtext}>Shipping Address</Text>
                                 <TextInput
                                     style={styles.input}
-                                    placeholder="778 Locust View Drive Oaklanda, CA"
+                                    // placeholder="778 Locust View Drive Oaklanda, CA"
                                     placeholderTextColor="#391713"
                                     value={shippingAddress}
                                     onChangeText={setShippingAddress}
                                 />
-                                <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20, color:'#391713'}}>Order Summary</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20, color: '#391713' }}>Order Summary</Text>
                                     <TouchableOpacity style={styles.cancelButton}>
                                         <Text style={styles.cancelButtonText}>Edit</Text>
                                     </TouchableOpacity>
@@ -135,7 +139,7 @@ const ConfirmOrderPage = ({ route }) => {
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button
                                 mode="contained"
-                                onPress={() => {navigation.navigate('Payment',{orderItems, totalAmount,shippingAddress})}}
+                                onPress={handlePlaceOrder}
                                 style={styles.loginButton}
                                 labelStyle={styles.loginButtonText}
                             >
@@ -244,7 +248,7 @@ const styles = StyleSheet.create(
             borderRadius: 20,
             width: 58,
             alignItems: 'center',
-            justifyContent:'center'
+            justifyContent: 'center'
         },
         cancelButtonText: {
             color: '#fff',

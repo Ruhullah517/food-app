@@ -27,6 +27,10 @@ import NotificationSettingPage from '../screens/NotificationSetting';
 import PasswordSettingPage from '../screens/PasswordSetting';
 import ConfirmOrderPage from '../screens/ConfirmOrder';
 import PayNowPage from '../screens/PayNow';
+import TrackOrder from '../screens/TrackOrder';
+import FilterPage from '../screens/Filter';
+import FoodDetailPage from './FoodDetail';
+import BestSellerPage from '../screens/BestSellerPage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -148,6 +152,30 @@ export default function CommonStackNavigator({ initialRoute }) {
       <Stack.Screen name="Payment">
         {(props) => <BottomNavigationWrapper>
           <PayNowPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="TrackOrder">
+        {(props) => <BottomNavigationWrapper>
+          <TrackOrder {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="Filter">
+        {(props) => <BottomNavigationWrapper>
+          <FilterPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="FoodDetail">
+        {(props) => <BottomNavigationWrapper>
+          <FoodDetailPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="BestSeller">
+        {(props) => <BottomNavigationWrapper>
+          <BestSellerPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>
