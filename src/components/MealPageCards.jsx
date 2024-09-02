@@ -58,7 +58,7 @@ const MealsPageCards = ({ selectedCategory }) => {
         descriptionHead: 'Tortilla Chips With Toppins',
         ratings: 5,
         price: 20,
-        image: require('../../assets/skewer.png'),
+        image: require('../../assets/meals1.png'),
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
 
     }
@@ -101,7 +101,7 @@ const MealsPageCards = ({ selectedCategory }) => {
         descriptionHead: 'Tortilla Chips With Toppins',
         ratings: 5,
         price: 15,
-        image: require('../../assets/skewer.png'),
+        image: require('../../assets/meals1.png'),
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
 
     }
@@ -134,9 +134,9 @@ const MealsPageCards = ({ selectedCategory }) => {
     }
     return (<>
         {
-            (selectedCategory === "Snacks" ? snacks : selectedCategory === "Meal" ? meals : selectedCategory === "Vegan" ? vegan : selectedCategory === "Dessert" ? dessert : selectedCategory === "Drinks" ? drinks : snacks).map((item) => (
+            (selectedCategory === "Snacks" ? snacks : selectedCategory === "Meal" ? meals : selectedCategory === "Vegan" ? vegan : selectedCategory === "Dessert" ? dessert : selectedCategory === "Drinks" ? drinks : snacks).map((item, index) => (
                 <>
-                    <TouchableOpacity style={styles.mealsCard} onPress={() => navigation.navigate('FoodDetail', { item })}>
+                    <TouchableOpacity key={index} style={styles.mealsCard} onPress={() => navigation.navigate('FoodDetail', { item, advertisement :false})}>
                         <Image source={item.image} style={styles.mealsImage} />
                         <View style={styles.infoContainer}>
                             <View style={{ width: "100%" }}>

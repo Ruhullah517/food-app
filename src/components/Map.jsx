@@ -4,7 +4,7 @@ import MapView, { Marker, Polyline } from 'react-native-maps';
 
 
 
-const Map = () => {
+const Map = ({ width, height }) => {
 
     const startLocation = {
         latitude: 37.78825,
@@ -16,10 +16,10 @@ const Map = () => {
     };
 
     return (
-        <View style={{borderRadius:11, overflow:"hidden"}}>
+        <View style={{ borderRadius: 11, overflow: "hidden" }}>
 
             <MapView
-                style={styles.map}
+                style={{ width: width, height: height }}
                 initialRegion={{
                     latitude: (startLocation.latitude + endLocation.latitude) / 2,
                     longitude: (startLocation.longitude + endLocation.longitude) / 2,
@@ -44,10 +44,3 @@ const Map = () => {
     )
 };
 export default Map;
-
-const styles = StyleSheet.create({
-    map: {
-        width: 322,
-        height: 191,
-    },
-});

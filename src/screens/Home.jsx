@@ -216,7 +216,7 @@ const HomePage = () => {
                             showsHorizontalScrollIndicator={false}
                         >
                             {data.map((item, index) => (
-                                <TouchableOpacity key={index} style={styles.discountCard} onPress={() => navigation.navigate('FoodDetail', { item: item, advertisement: true })}>
+                                <TouchableOpacity key={index} style={styles.discountCard} onPress={() => navigation.navigate('FoodDetail', { item, advertisement: true })}>
                                     <Ellipse width={55} height={55} style={styles.ellipse} />
                                     <Ellipse width={46} height={46} style={styles.ellipse2} />
                                     <View style={styles.textContainer}>
@@ -239,7 +239,7 @@ const HomePage = () => {
                         <Text style={styles.reHeader}>Recommend</Text>
                         <View style={styles.reGrid}>
                             {recommend.map((item, index) => (
-                                <View key={index} style={styles.reCard}>
+                                <TouchableOpacity key={index} style={styles.reCard} onPress={()=>navigation.navigate('Recommendations')}>
                                     <Image source={item.image} style={styles.reImage} alt={item.alt} />
                                     <View style={styles.reRatingContainer}>
                                         <View style={styles.reRating}>
@@ -251,13 +251,12 @@ const HomePage = () => {
                                     <View style={styles.rePriceTag}>
                                         <Text style={styles.rePriceText}>{item.price}</Text>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             ))}
                         </View>
                     </View>
 
                 </Card>
-
             </View>
         </ScrollView>
     </>

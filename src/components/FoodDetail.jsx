@@ -47,15 +47,15 @@ const FoodDetailPage = ({ route }) => {
         // console.log(selected);
     };
     const addToCart = () => {
-        const data = {
-            title: item.title,
-            price: item.price,
-            quantity: quantity,
-            toppingsTitle: selectedToppings[0].title,
-            toppingsPrice: selectedToppings[0].price,
-        };
-        console.log(data);
-        console.log("submit");
+        // const data = {
+        //     title: item.title,
+        //     price: item.price,
+        //     quantity: quantity,
+        //     toppingsTitle: selectedToppings[0].title,
+        //     toppingsPrice: selectedToppings[0].price,
+        // };
+        // console.log(data);
+        console.log("addedToCart");
     };
 
     return (

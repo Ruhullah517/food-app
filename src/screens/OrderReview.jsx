@@ -14,7 +14,7 @@ const { width, height } = Dimensions.get('window');
 const LeaveReviewPage = ({ route, navigation }) => {
     console.log(route); // Add this line to see the route object
     const { order } = route.params || {};
-    console.log(order);
+    // console.log(order);
 
 
     const [rating, setRating] = useState(0);

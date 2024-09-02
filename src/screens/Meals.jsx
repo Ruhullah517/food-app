@@ -111,14 +111,15 @@ const MealsPage = () => {
                             name: 'Drinks',
                             icon: <DrinksIcon width={21} height={37} style={styles.icon} />
 
-                        }].map(category => (
+                        }].map((category, index) => (
                             <View key={category.name} style={selectedCategory === category.name ? styles.categoryActive : styles.category}>
                                 <TouchableOpacity key={category.name} onPress={() => handleCategorySelection(category.name)}>
                                     <View style={selectedCategory === category.name ? styles.iconsBackGroundActive : styles.iconsBackGround}>
                                         {category.icon}
                                     </View>
                                     <Text style={styles.categoryName}>{category.name}</Text>
-                                    {selectedCategory === category.key && <View style={styles.connector} />}
+                                    {selectedCategory === category.name ? <View style={index === 0 ? styles.curvedFirst : styles.curved}></View> : null}
+                                    {selectedCategory === category.name ? <View style={index === 4 ? styles.curved2Last : styles.curved2}></View> : null}
                                 </TouchableOpacity>
                             </View>
                         ))}
@@ -196,21 +197,22 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 5,
         bottom: 0,
-        paddingBottom: 30
+        paddingBottom: 30,
+
     }
     ,
     categories: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginVertical: 10,
-        paddingHorizontal: 1,
+        paddingHorizontal: 8,
         marginBottom: -10
     },
     category: {
         alignItems: 'center',
         width: 65,
         marginBottom: -10,
-        paddingVertical: 10,
+        paddingVertical: 8,
 
     },
     categoryActive: {
@@ -228,6 +230,56 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         fontSize: 12,
         textAlign: 'center'
+    },
+    curvedFirst: {
+        width: 20,
+        height: 20,
+        backgroundColor: "transparent",
+        position: 'absolute',
+        bottom: -8,
+        left: -22,
+        borderBottomRightRadius: 50,
+        borderBottomWidth: 3,
+        borderColor: "#F5F5F5",
+        borderRightWidth: 6
+    },
+    curved: {
+        width: 20,
+        height: 20,
+        backgroundColor: "transparent",
+        position: 'absolute',
+        bottom: -6,
+        left: -22,
+        borderBottomRightRadius: 50,
+        borderBottomWidth: 6,
+        borderColor: "#F5F5F5",
+        borderRightWidth: 6
+    },
+    curved2Last: {
+        width: 15,
+        height: 15,
+        backgroundColor: "transparent",
+        position: 'absolute',
+        bottom: -5,
+        right: -18,
+        borderBottomLeftRadius: 50,
+        borderBottomWidth: 2,
+        borderColor: "#F5F5F5",
+        borderLeftWidth: 5,
+        zIndex: 1
+    },
+    curved2: {
+        width: 15,
+        height: 15,
+        backgroundColor: "transparent",
+        position: 'absolute',
+        bottom: -5,
+        right: -18,
+        borderBottomLeftRadius: 50,
+        borderBottomWidth: 5,
+        borderColor: "#F5F5F5",
+        borderLeftWidth: 5,
+        zIndex: 1
     },
     connector: {
         position: 'absolute',

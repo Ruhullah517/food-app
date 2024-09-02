@@ -40,22 +40,22 @@ const CancelOrderPage = ({ route, navigation }) => {
     };
 
     const handleSubmit = () => {
-        const data = {
-            reasons: selectedReasons,
-            otherReason: otherReason,
-        };
-        console.log('Cancellation Data:', data);
+        // const data = {
+        //     reasons: selectedReasons,
+        //     otherReason: otherReason,
+        // };
+        // // console.log('Cancellation Data:', data);
 
-        setReasons([
-            { id: 1, label: 'Lorem ipsum dolor sit amet', checked: false },
-            { id: 2, label: 'Lorem ipsum dolor sit amet', checked: false },
-            { id: 3, label: 'Lorem ipsum dolor sit amet', checked: false },
-            { id: 4, label: 'Lorem ipsum dolor sit amet', checked: false },
-        ]);
+        // setReasons([
+        //     { id: 1, label: 'Lorem ipsum dolor sit amet', checked: false },
+        //     { id: 2, label: 'Lorem ipsum dolor sit amet', checked: false },
+        //     { id: 3, label: 'Lorem ipsum dolor sit amet', checked: false },
+        //     { id: 4, label: 'Lorem ipsum dolor sit amet', checked: false },
+        // ]);
 
-        setOtherReason('');
-        setSelectedReasons([]);
-        navigation.navigate('ConfirmationPage')
+        // setOtherReason('');
+        // setSelectedReasons([]);
+        navigation.navigate('ConfirmationPage', { orderCompleted: false })
     };
 
     if (!loaded) {

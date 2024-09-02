@@ -114,7 +114,7 @@ const PayNowPage = ({ route }) => {
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button
                                 mode="contained"
-                                onPress={() => { navigation.navigate('ConfirmationPage', { orderStatus: "completed", shippingAddress }) }}
+                                onPress={() => { navigation.navigate('ConfirmationPage', { orderCompleted: true, shippingAddress }) }}
                                 style={styles.loginButton}
                                 labelStyle={styles.loginButtonText}
                             >

@@ -31,6 +31,11 @@ import TrackOrder from '../screens/TrackOrder';
 import FilterPage from '../screens/Filter';
 import FoodDetailPage from './FoodDetail';
 import BestSellerPage from '../screens/BestSellerPage';
+import RecommendationPage from '../screens/Recommendations';
+import FavoritesPage from '../screens/Favorites';
+import HistoryPage from '../screens/History';
+import OrderDetailPage from '../screens/OrderDetail';
+import LiveTrack from '../screens/LiveTrack';
 
 
 const Tab = createBottomTabNavigator();
@@ -177,6 +182,36 @@ export default function CommonStackNavigator({ initialRoute }) {
       <Stack.Screen name="BestSeller">
         {(props) => <BottomNavigationWrapper>
           <BestSellerPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="Recommendations">
+        {(props) => <BottomNavigationWrapper>
+          <RecommendationPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="FavouritesPage">
+        {(props) => <BottomNavigationWrapper>
+          <FavoritesPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="History">
+        {(props) => <BottomNavigationWrapper>
+          <HistoryPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="OrderDetails">
+        {(props) => <BottomNavigationWrapper>
+          <OrderDetailPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="LiveTracker">
+        {(props) => <BottomNavigationWrapper>
+          <LiveTrack {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>

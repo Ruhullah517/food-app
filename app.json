@@ -12,7 +12,11 @@
       "backgroundColor": "#F5CB58"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "We need your location to show the map.",
+        "NSLocationAlwaysUsageDescription": "We need your location to show the map."
+      }
     },
     "android": {
       "package": "com.ruhullah.foodapp",
@@ -21,7 +25,9 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
       ]
     },
     "web": {

@@ -48,12 +48,15 @@ const TrackOrder = ({ route }) => {
                                     style={styles.input}
                                     placeholder="778 Locust View Drive Oaklanda, CA"
                                     placeholderTextColor="#391713"
-                                    value={shippingAddress}
+                                    value={shippingAddress || ""}
                                 />
                             </View>
                         </View>
                         <View style={styles.mapCard}>
-                            <Map />
+                            {/* <View style={{ width: 322, height: 191, backgroundColor: "#F5CB58", borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontFamily: "LeagueSpartanMedium" }}>Map</Text>
+                            </View> */}
+                            <Map width={323} height={170}/>
                             <View style={styles.deliveryTimeContainer}>
                                 <Text style={styles.deliveryTimeTitle}>Delivery Time</Text>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -128,15 +131,15 @@ const TrackOrder = ({ route }) => {
                                 <TouchableOpacity style={styles.returnButton} onPress={() => navigation.navigate('HomePage')}>
                                     <Text style={styles.buttonTextReturn}>Return Home</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.trackButton} onPress={''}>
+                                <TouchableOpacity style={styles.trackButton} onPress={() => { }}>
                                     <Text style={styles.buttonText}>Track Order</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
-                </Card>
-            </View>
-        </ScrollView>
+                </Card >
+            </View >
+        </ScrollView >
 
     </>
     )
@@ -167,7 +170,7 @@ const styles = StyleSheet.create(
             height: "100%",
             alignSelf: 'center',
             marginTop: 20,
-            paddingBottom: 60,
+            paddingBottom: 20,
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
             paddingHorizontal: 30,

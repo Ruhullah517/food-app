@@ -9,8 +9,8 @@ import DoneIcon from '../../assets/Icons/DoneIcon.svg';
 const { width, height } = Dimensions.get('window');
 
 const ConfirmationPage = ({ route, navigation }) => {
-    const { orderStatus, shippingAddress } = route.params;
-    console.log(orderStatus);
+    const { orderCompleted, shippingAddress } = route.params;
+    console.log(orderCompleted);
 
 
     const [loadingComplete, setLoadingComplete] = useState(false);
@@ -77,7 +77,7 @@ const ConfirmationPage = ({ route, navigation }) => {
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <View>
 
-                        {orderStatus === 'completed' ? (
+                        {orderCompleted ? (
                             !loadingComplete ? (
                                 <>
                                     <View style={{ position: "relative" }}>
@@ -122,12 +122,21 @@ const ConfirmationPage = ({ route, navigation }) => {
 
                     </View>
                     <View style={styles.textContainer}>
-                        <Text style={styles.login}>¡Order Confirmed!</Text>
-                        <Text style={styles.description}>Your order has been placed successfully</Text>
-                        <Text style={styles.description}>Delivery by Thu, 29th, 4:00 PM</Text>
-                        <Text style={styles.trackOrder}
-                            onPress={() => navigation.navigate('TrackOrder', { shippingAddress })}
-                        >Track my order</Text>
+                        {orderCompleted ?
+                            <>
+                                <Text style={styles.login}>¡Order Confirmed!</Text>
+                                <Text style={styles.description}>Your order has been placed successfully</Text>
+                                <Text style={styles.description}>Delivery by Thu, 29th, 4:00 PM</Text>
+                                <Text style={styles.trackOrder}
+                                    onPress={() => navigation.navigate('TrackOrder', { shippingAddress })}
+                                >Track my order</Text>
+                            </>
+                            :
+                            <>
+                                <Text style={styles.login}>¡Order Cancelled!</Text>
+                                <Text style={styles.description}>Your order has been successfully cancelled</Text>
+                            </>
+                        }
                     </View>
                 </View>
                 <Text style={styles.bottomText}>If you have any questions, reach directly to our customer support</Text>

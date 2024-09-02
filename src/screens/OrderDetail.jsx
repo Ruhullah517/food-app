@@ -5,40 +5,30 @@ import BackArrow from '../../assets/Icons/backarrow.svg'
 import { useFonts } from 'expo-font';
 import { Button, IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import CartItem from '../components/CartItem';
+import OrderItem from '../components/OrderDetailItem';
+
 
 
 const { width, height } = Dimensions.get('window');
 
 
-const ConfirmOrderPage = ({ route }) => {
+const OrderDetailPage = ({ route }) => {
     const navigation = useNavigation();
 
-    const { checkoutDetails } = route.params;
-    const { cartItems, taxAndFees, delivery, total, subtotal } = checkoutDetails;
-    const [orderItems, setOrderItems] = useState(cartItems);
-    const [totalAmount, setTotalAmount] = useState(total);
-    const [subTotal, setSubTotal] = useState(subtotal);
-    const [shippingAddress, setShippingAddress] = useState('778 Locust View Drive Oaklanda, CA');
-    const updateQuantity = (index, newQuantity) => {
-        const updatedItems = [...orderItems];
-        updatedItems[index].quantity = newQuantity;
-        setOrderItems(updatedItems);
-        calculateTotal();
-
-    };
-
+    const { item } = route.params;
+    const [order, setOrder] = useState(item);
+    const taxAndFees = 5.00; 
+    const delivery = 3.00;
     const calculateSubtotal = () => {
-        return orderItems.reduce((sum, order) => sum + order.price * order.quantity, 0);
-
+        return order.items.reduce((sum, order) => sum + order.price * order.quantity, 0);
     };
-
     const calculateTotal = () => {
-        const total = calculateSubtotal() + taxAndFees + delivery;
-        setTotalAmount(total);
+        return calculateSubtotal() + taxAndFees + delivery;
     };
-    const handlePlaceOrder = () => {
-        navigation.navigate('Payment', { orderItems, totalAmount, shippingAddress });
+    const updateQuantity = (index, newQuantity) => {
+        const updatedItems = [...order.items];
+        updatedItems[index].quantity = newQuantity;
+        setOrder({ ...order, items: updatedItems });
     };
 
     const [loaded] = useFonts({
@@ -64,84 +54,63 @@ const ConfirmOrderPage = ({ route }) => {
                     <TouchableOpacity style={{ padding: 5, marginLeft: -5 }} onPress={() => navigation.goBack()}>
                         <BackArrow />
                     </TouchableOpacity>
-                    <Text style={styles.signup}>Confirm Order</Text>
+                    <Text style={styles.signup}>Order Details</Text>
                 </View>
 
                 <Card style={styles.card}>
                     <View style={styles.cardContainer}>
                         <View style={styles.drawerItems}>
-                            <View style={{ flexDirection: "column", paddingHorizontal: 15, rowGap: 10, marginBottom: 10 }}>
-                                <Text style={styles.shippingtext}>Shipping Address</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    // placeholder="778 Locust View Drive Oaklanda, CA"
-                                    placeholderTextColor="#391713"
-                                    value={shippingAddress}
-                                    onChangeText={setShippingAddress}
-                                />
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20, color: '#391713' }}>Order Summary</Text>
-                                    <TouchableOpacity style={styles.cancelButton}>
-                                        <Text style={styles.cancelButtonText}>Edit</Text>
-                                    </TouchableOpacity>
+                            <View style={{ flexDirection: "column", paddingHorizontal: 25, rowGap: 10, marginBottom: 10 }}>
+                                <View>
+                                    <Text style={{ fontFamily: 'LeagueSpartanMedium', fontSize: 20 }}>Order No. {order.orderNumber}</Text>
+                                    <Text style={{ fontFamily: 'LeagueSpartanLight', fontSize: 14 }}>{order.date}, {order.time}</Text>
                                 </View>
+                                {order.items.map((item, index) =>
+                                    <View key={index}>
+                                        <View
+                                            style={{
+                                                width: '100%',
+                                                backgroundColor: '#FFD8C7',
+                                                height: 1,
+                                                marginLeft: 0,
+                                            }}
+                                        />
+                                        <OrderItem
+                                            key={index}
+                                            item={item}
+                                            onQuantityChange={(newQuantity) => updateQuantity(index, newQuantity)}
+                                        />
+                                    </View>
+                                )}
                             </View>
-                            <View
-                                style={{
-                                    width: '90%',
-                                    backgroundColor: '#FFD8C7',
-                                    height: 1,
-                                    marginLeft: 20,
-                                }}
-                            />
-                            {orderItems.map((item, index) => (
-                                <View key={index}>
-                                    <CartItem
-                                        key={index}
-                                        item={item}
-                                        onQuantityChange={(newQuantity) => updateQuantity(index, newQuantity)}
-                                        ConfirmOrderPage={true}
-                                    />
-
-                                    <View
-                                        style={{
-                                            width: '90%',
-                                            backgroundColor: '#FFD8C7',
-                                            height: 1,
-                                            marginLeft: 20,
-                                        }}
-                                    />
-
-                                </View>
-                            ))}
-                            <View style={{ marginTop: 20, }}>
+                            <View style={{ marginTop: 20, flexDirection: "column", justifyContent: 'center', alignItems: 'center' }}>
                                 <View style={styles.totalsContainer}>
                                     <Text style={styles.totals}>Subtotal</Text>
                                     <Text style={styles.totals}>${calculateSubtotal().toFixed(2)}</Text>
                                 </View>
                                 <View style={styles.totalsContainer}>
                                     <Text style={styles.totals}>Tax and Fees</Text>
-                                    <Text style={styles.totals}>${taxAndFees.toFixed(2)}</Text>
+                                    <Text style={styles.totals}>${taxAndFees}</Text>
                                 </View>
                                 <View style={styles.totalsContainer}>
                                     <Text style={styles.totals}>Delivery</Text>
-                                    <Text style={styles.totals}>${delivery.toFixed(2)}</Text>
+                                    <Text style={styles.totals}>${delivery}</Text>
                                 </View>
                                 <View style={{ width: width * 0.82, marginLeft: 20, borderStyle: 'dotted', borderTopWidth: 1, borderColor: '#FFDECF' }}></View>
                                 <View style={styles.totalsContainer}>
                                     <Text style={styles.totals}>Total</Text>
-                                    <Text style={styles.totals}>${totalAmount.toFixed(2)}</Text>
+                                    <Text style={styles.totals}>${calculateTotal().toFixed(2)}</Text>
                                 </View>
                             </View>
                         </View>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button
                                 mode="contained"
-                                onPress={handlePlaceOrder}
+                                onPress={()=>navigation.navigate('LiveTracker')}
                                 style={styles.loginButton}
                                 labelStyle={styles.loginButtonText}
                             >
-                                Place Order
+                                Order Again
                             </Button>
                         </View>
                     </View>
@@ -193,7 +162,7 @@ const styles = StyleSheet.create(
             alignItems: 'center'
         },
         drawerItems: {
-            width: width * 0.95,
+            width: width,
         },
         shippingtext: {
             fontFamily: "LeagueSpartanBold",
@@ -224,15 +193,15 @@ const styles = StyleSheet.create(
         loginButton: {
             backgroundColor: '#FFDECF',
             borderRadius: 30,
-            width: 157,
-            height: 38,
+            width: 100,
+            height: 26,
             marginTop: 10,
             marginBottom: 4,
             justifyContent: 'center',
             alignItems: 'center',
         },
         loginButtonText: {
-            fontSize: 23,
+            fontSize: 15,
             fontFamily: 'LeagueSpartanRegular',
             paddingVertical: 1,
             width: "100%",
@@ -257,4 +226,4 @@ const styles = StyleSheet.create(
     }
 )
 
-export default ConfirmOrderPage;
+export default OrderDetailPage;

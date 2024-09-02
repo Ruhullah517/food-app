@@ -8,7 +8,7 @@ import MealIcon from "../../assets/Icons/MealIcon.svg";
 
 
 
-const BestSellerCard = () => {
+const BestSellerCard = ({ favourites }) => {
 
     const BestSellers = [
         {
@@ -51,9 +51,9 @@ const BestSellerCard = () => {
     ]
 
     return (<>
-        {BestSellers.map(item =>
+        {BestSellers.map((item,index) =>
 
-            <View style={styles.itemCard}>
+            <View key={index} style={styles.itemCard}>
                 <View style={styles.imageContainer}>
                     <Image
                         source={item.image}
@@ -65,30 +65,41 @@ const BestSellerCard = () => {
                     <TouchableOpacity style={styles.iconTopRight}>
                         <LikeIcon width={12} height={12} />
                     </TouchableOpacity>
-                    <View style={styles.priceTag}>
+                    {!favourites ? <View style={styles.priceTag}>
                         <Text style={styles.priceText}>${item.price.toFixed(2)}</Text>
                     </View>
+                        :
+                        null
+                    }
                 </View>
-                <View style={styles.textContainer}>
+                <View style={!favourites ? styles.textContainer : styles.textContainerFavourite}>
                     <View style={styles.titleRow}>
-                        <Text style={styles.title}
+                        <Text style={!favourites ? styles.title : styles.titleFavourite}
                             numberOfLines={2}
                             ellipsizeMode="tail"
                         >{item.title}</Text>
-                        <View style={styles.ratingContainer}>
-                            <Text style={styles.rating}>{item.ratings.toFixed(1)}<StarIcon /></Text>
-                        </View>
+                        {
+                            !favourites ? <View style={styles.ratingContainer}>
+                                <Text style={styles.rating}>{item.ratings.toFixed(1)}<StarIcon /></Text>
+                            </View>
+                                :
+                                null
+                        }
                     </View>
                     <View style={styles.descriptionRow}>
-                        <Text style={styles.description}
+                        <Text style={!favourites ? styles.description : styles.descriptionFavourite}
                             numberOfLines={2}
                             ellipsizeMode="tail"
                         >
                             {item.description}
                         </Text>
-                        <TouchableOpacity style={{ backgroundColor: '#E95322', width: 19, height: 19, borderRadius: 7, justifyContent: 'center', alignItems: 'center' }}>
-                            <CartIcon width={11.6} height={11.6} />
-                        </TouchableOpacity>
+                        {
+                            !favourites ? <TouchableOpacity style={{ backgroundColor: '#E95322', width: 19, height: 19, borderRadius: 7, justifyContent: 'center', alignItems: 'center' }}>
+                                <CartIcon width={11.6} height={11.6} />
+                            </TouchableOpacity>
+                                :
+                                null
+                        }
                     </View>
                 </View>
             </View>
@@ -167,6 +178,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
 
     },
+    textContainerFavourite: {
+        padding: 10,
+        width: 158,
+        height: 80,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems:'center'
+
+    },
     titleRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -177,7 +197,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'LeagueSpartanMedium',
         color: '#391713',
-        width: 106
+        width: 106,
+    },
+    titleFavourite: {
+        fontSize: 16,
+        fontFamily: 'LeagueSpartanMedium',
+        color: '#E95322',
+        // width: 106,
+        textAlign:'center'
     },
     ratingContainer: {
         flexDirection: 'row',
@@ -206,5 +233,14 @@ const styles = StyleSheet.create({
         marginRight: 10,
         fontFamily: 'LeagueSpartanLight',
         width: 118
+    },
+    descriptionFavourite: {
+        color: '#391713',
+        fontSize: 12,
+        flex: 1,
+        marginRight: 10,
+        fontFamily: 'LeagueSpartanLight',
+        width: 118,
+        textAlign:'center'
     },
 })
