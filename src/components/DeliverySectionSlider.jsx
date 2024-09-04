@@ -2,9 +2,11 @@ import React, { useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import DeliveryBoyIcon from '../../assets/Icons/DeliverBoyIcon.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const DeliverySectionSlider = () => {
     const slideAnim = useRef(new Animated.Value(0)).current; // Initial position of the icon
+    const navigation = useNavigation(); // Access the navigation object
 
     useEffect(() => {
         // Start the sliding animation
@@ -12,7 +14,10 @@ const DeliverySectionSlider = () => {
             toValue: 1, // End position
             duration: 3000, // Duration of the animation in milliseconds
             useNativeDriver: true, // Using native driver for better performance
-        }).start();
+        }).start(() => {
+            // Navigate to the confirmation page when the animation completes
+            navigation.navigate('ConfirmationPage',{ orderCompleted: "Delivered"}); // Replace 'ConfirmationPage' with your actual route name
+        });
     }, [slideAnim]);
 
     const translateX = slideAnim.interpolate({

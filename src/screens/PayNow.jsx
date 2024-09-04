@@ -56,8 +56,8 @@ const PayNowPage = ({ route }) => {
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <View style={{ flexDirection: 'column' }}>
-                                        {orderItems.map(item => (
-                                            <View style={{ flexDirection: 'row', columnGap: 10 }}>
+                                        {orderItems.map((item,index) => (
+                                            <View key={index} style={{ flexDirection: 'row', columnGap: 10 }}>
                                                 <Text style={{ fontFamily: "LeagueSpartanLight", fontSize: 14 }}>{item.name}</Text>
                                                 <Text style={{ fontFamily: "LeagueSpartanLight", fontSize: 14, color: '#E95322' }}>{item.quantity}Items</Text>
                                             </View>
@@ -114,7 +114,7 @@ const PayNowPage = ({ route }) => {
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button
                                 mode="contained"
-                                onPress={() => { navigation.navigate('ConfirmationPage', { orderCompleted: true, shippingAddress }) }}
+                                onPress={() => { navigation.navigate('ConfirmationPage', { orderCompleted: "Completed", shippingAddress }) }}
                                 style={styles.loginButton}
                                 labelStyle={styles.loginButtonText}
                             >

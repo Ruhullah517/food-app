@@ -53,17 +53,17 @@ const BottomNav = () => {
           style={styles.icon}
         />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem} onPress={()=> navigation.navigate('FavouritesPage')}>
+      <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('FavouritesPage')}>
         <HeartIcon
           style={styles.icon}
         />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem} onPress={()=>navigation.navigate('History')}>
+      <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('History')}>
         <OrderIcon
           style={styles.icon}
         />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}>
+      <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Help')}>
         <HeadPhoneIcon
           style={styles.icon}
         />

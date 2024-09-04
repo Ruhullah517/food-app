@@ -5,6 +5,7 @@ import BackArrow from '../../assets/Icons/backarrow.svg';
 import CircleIcon from '../../assets/Icons/CircleIcon.svg';
 import CancelIcon from '../../assets/Icons/CancelIcon.svg'; // Replace this with your actual done icon
 import DoneIcon from '../../assets/Icons/DoneIcon.svg';
+import Rating from './RatingStar';
 
 const { width, height } = Dimensions.get('window');
 
@@ -27,6 +28,7 @@ const ConfirmationPage = ({ route, navigation }) => {
     const opacity1 = useRef(new Animated.Value(1)).current;
     const opacity2 = useRef(new Animated.Value(1)).current;
     const opacity3 = useRef(new Animated.Value(1)).current;
+    const [rating, setRating] = useState(0);
 
     useEffect(() => {
         const fadeAnimation = (animatedValue) => {
@@ -77,7 +79,7 @@ const ConfirmationPage = ({ route, navigation }) => {
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <View>
 
-                        {orderCompleted ? (
+                        {orderCompleted === "Completed" ? (
                             !loadingComplete ? (
                                 <>
                                     <View style={{ position: "relative" }}>
@@ -97,45 +99,89 @@ const ConfirmationPage = ({ route, navigation }) => {
                                 </>
                             ) : (
                                 <DoneIcon width={139} height={139} strokeWidth={0.5} />
-                            )) : (
-                            !loadingComplete ? (
-                                <>
-                                    <View style={{ position: "relative" }}>
-                                        <CircleIcon width={139} height={139} strokeWidth={0.5} />
-                                        <View style={{ flexDirection: "row", columnGap: 10, position: 'absolute', top: 60, left: 30 }}>
-                                            <Animated.View style={{ opacity: opacity1 }}>
-                                                <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
-                                            </Animated.View>
-                                            <Animated.View style={{ opacity: opacity2 }}>
-                                                <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
-                                            </Animated.View>
-                                            <Animated.View style={{ opacity: opacity3 }}>
-                                                <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
-                                            </Animated.View>
+                            )) :
+                            orderCompleted === "Delivered" ? (
+                                !loadingComplete ? (
+                                    <>
+                                        <View style={{ position: "relative" }}>
+                                            <CircleIcon width={139} height={139} strokeWidth={0.5} />
+                                            <View style={{ flexDirection: "row", columnGap: 10, position: 'absolute', top: 60, left: 30 }}>
+                                                <Animated.View style={{ opacity: opacity1 }}>
+                                                    <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                                </Animated.View>
+                                                <Animated.View style={{ opacity: opacity2 }}>
+                                                    <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                                </Animated.View>
+                                                <Animated.View style={{ opacity: opacity3 }}>
+                                                    <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                                </Animated.View>
+                                            </View>
                                         </View>
-                                    </View>
-                                </>
-                            ) : (
-                                <CancelIcon width={139} height={139} strokeWidth={0.5} />
-                            )
-                        )}
+                                    </>
+                                ) : (
+                                    <DoneIcon width={139} height={139} strokeWidth={0.5} />
+                                )
+                            ) :
+                                orderCompleted === "Cancelled" ? (
+                                    !loadingComplete ? (
+                                        <>
+                                            <View style={{ position: "relative" }}>
+                                                <CircleIcon width={139} height={139} strokeWidth={0.5} />
+                                                <View style={{ flexDirection: "row", columnGap: 10, position: 'absolute', top: 60, left: 30 }}>
+                                                    <Animated.View style={{ opacity: opacity1 }}>
+                                                        <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                                    </Animated.View>
+                                                    <Animated.View style={{ opacity: opacity2 }}>
+                                                        <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                                    </Animated.View>
+                                                    <Animated.View style={{ opacity: opacity3 }}>
+                                                        <CircleIcon width={18} height={18} strokeWidth={0.5} fill="#E95322" />
+                                                    </Animated.View>
+                                                </View>
+                                            </View>
+                                        </>
+                                    ) : (
+                                        <CancelIcon width={139} height={139} strokeWidth={0.5} />
+                                    ))
+                                    :
+                                    null
+                        }
 
                     </View>
                     <View style={styles.textContainer}>
-                        {orderCompleted ?
-                            <>
-                                <Text style={styles.login}>¡Order Confirmed!</Text>
-                                <Text style={styles.description}>Your order has been placed successfully</Text>
-                                <Text style={styles.description}>Delivery by Thu, 29th, 4:00 PM</Text>
-                                <Text style={styles.trackOrder}
-                                    onPress={() => navigation.navigate('TrackOrder', { shippingAddress })}
-                                >Track my order</Text>
-                            </>
-                            :
-                            <>
-                                <Text style={styles.login}>¡Order Cancelled!</Text>
-                                <Text style={styles.description}>Your order has been successfully cancelled</Text>
-                            </>
+                        {
+                            orderCompleted === "Completed" ?
+                                <>
+                                    <Text style={styles.login}>¡Order Confirmed!</Text>
+                                    <Text style={styles.description}>Your order has been placed successfully</Text>
+                                    <Text style={styles.description}>Delivery by Thu, 29th, 4:00 PM</Text>
+                                    <Text style={styles.trackOrder}
+                                        onPress={() => navigation.navigate('TrackOrder', { shippingAddress })}
+                                    >Track my order</Text>
+                                </>
+                                :
+                                orderCompleted === "Cancelled" ?
+                                    <>
+                                        <Text style={styles.login}>¡Order Cancelled!</Text>
+                                        <Text style={styles.description}>Your order has been successfully cancelled</Text>
+                                    </>
+                                    :
+                                    orderCompleted === "Delivered" ?
+                                        <>
+                                            <Text style={styles.login}>¡Order Delivered!</Text>
+                                            <Text style={styles.description}>Your order has been succesfully delivered, enjoy it!</Text>
+                                            <View style={{ marginTop: 30 }}>
+                                                <Text style={styles.description}>Rate your Delivery</Text>
+                                            </View>
+                                            <View style={{marginTop:30, marginBottom:-60}}>
+                                                <View style={styles.ratingContainer}>
+                                                    <Rating rating={rating} setRating={setRating} backgroundColor={"#F5CB58"} />
+                                                </View>
+                                            </View>
+
+                                        </>
+                                        :
+                                        null
                         }
                     </View>
                 </View>

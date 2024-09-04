@@ -84,7 +84,7 @@ const FilterPage = () => {
                         <Text style={{ fontFamily: "LeagueSpartanMedium", fontSize: 20, color: "#391713" }}>Sort by</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontFamily: "LeagueSpartanLight", fontSize: 14, color: "#391713" }}>Top Rated</Text>
-                            <Rating rating={rating} setRating={setRating} />
+                            <Rating rating={rating} setRating={setRating} backgroundColor={"#F8F8F8"}/>
                         </View>
                         <View style={styles.divider}></View>
                     </View>

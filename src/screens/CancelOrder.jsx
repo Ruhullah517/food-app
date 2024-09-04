@@ -55,7 +55,7 @@ const CancelOrderPage = ({ route, navigation }) => {
 
         // setOtherReason('');
         // setSelectedReasons([]);
-        navigation.navigate('ConfirmationPage', { orderCompleted: false })
+        navigation.navigate('ConfirmationPage', { orderCompleted: "Cancelled" })
     };
 
     if (!loaded) {

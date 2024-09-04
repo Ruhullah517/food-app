@@ -135,8 +135,8 @@ const MealsPageCards = ({ selectedCategory }) => {
     return (<>
         {
             (selectedCategory === "Snacks" ? snacks : selectedCategory === "Meal" ? meals : selectedCategory === "Vegan" ? vegan : selectedCategory === "Dessert" ? dessert : selectedCategory === "Drinks" ? drinks : snacks).map((item, index) => (
-                <>
-                    <TouchableOpacity key={index} style={styles.mealsCard} onPress={() => navigation.navigate('FoodDetail', { item, advertisement :false})}>
+                <View key={index}>
+                    <TouchableOpacity style={styles.mealsCard} onPress={() => navigation.navigate('FoodDetail', { item, advertisement: false })}>
                         <Image source={item.image} style={styles.mealsImage} />
                         <View style={styles.infoContainer}>
                             <View style={{ width: "100%" }}>
@@ -156,7 +156,7 @@ const MealsPageCards = ({ selectedCategory }) => {
                         </View>
                     </TouchableOpacity>
                     <View style={styles.divider}></View>
-                </>
+                </View>
             )
             )
         }

@@ -36,6 +36,8 @@ import FavoritesPage from '../screens/Favorites';
 import HistoryPage from '../screens/History';
 import OrderDetailPage from '../screens/OrderDetail';
 import LiveTrack from '../screens/LiveTrack';
+import HelpPage from '../screens/Help';
+import SupportPage from '../screens/Support';
 
 
 const Tab = createBottomTabNavigator();
@@ -212,6 +214,18 @@ export default function CommonStackNavigator({ initialRoute }) {
       <Stack.Screen name="LiveTracker">
         {(props) => <BottomNavigationWrapper>
           <LiveTrack {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="Help">
+        {(props) => <BottomNavigationWrapper>
+          <HelpPage {...props} />
+        </BottomNavigationWrapper>
+        }
+      </Stack.Screen>
+      <Stack.Screen name="Support">
+        {(props) => <BottomNavigationWrapper>
+          <SupportPage {...props} />
         </BottomNavigationWrapper>
         }
       </Stack.Screen>

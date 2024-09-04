@@ -5,20 +5,15 @@ import BackArrow from '../../assets/Icons/backarrow.svg'
 import { useFonts } from 'expo-font';
 import { Button, IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import CircleIcon from '../../assets/Icons/CircleIcon.svg';
-import HeadphoneIcon from '../../assets/Icons/headPhone2.svg';
-import WebIcon from '../../assets/Icons/Web.svg';
-import WhatsappIcon from '../../assets/Icons/WhatApp.svg';
-import KeyIcon from '../../assets/Icons/KeyIcon.svg';
-import NotifyIcon from '../../assets/Icons/NotifyIcon.svg';
-import ProfileIcon from '../../assets/Icons/ProfileIcon.svg';
+import DoneIcon from '../../assets/Icons/DoneIcon.svg';
+
 
 const { width, height } = Dimensions.get('window');
 
 
-const SettingsPage = () => {
+const HelpPage = () => {
     const navigation = useNavigation();
-
+    // const { orderItems, totalAmount, shippingAddress } = route.params;
     const [loaded] = useFonts({
         LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
         LeagueSpartanBold: require('../../assets/fonts/League Spartan Bold.ttf'),
@@ -27,33 +22,25 @@ const SettingsPage = () => {
         LeagueSpartanblack: require('../../assets/fonts/League Spartan Black.ttf'),
         LeagueSpartanRegular: require('../../assets/fonts/League Spartan Regular.ttf'),
 
-    })
+    });
 
-    const settings = [
+    const helpMethods = [
         {
             id: 1,
-            title: "Notification Setting",
-            icon: <NotifyIcon width={24} height={35} strokeWidth={1.5} />,
+            title: "Help with the order",
+            description: 'Support',
             checked: false,
-            onPress: () => { navigation.navigate('NotificationSetting') }
+            path: () => navigation.navigate('Support')
         },
         {
             id: 2,
-            title: "Password Setting",
-            icon: <KeyIcon width={35} height={34} />,
+            title: "Help center",
+            description: 'General Information',
             checked: false,
-            onPress: () => { navigation.navigate('PasswordSetting') }
-
+            path: () => navigation.navigate('Help&FAQs')
         },
-        {
-            id: 3,
-            title: "Delete Account",
-            icon: <ProfileIcon width={23} height={34} strokeWidth={1.3} />,
-            checked: false,
-            onPress: () => { }
-
-        }
     ];
+
 
     if (!loaded) {
         return null;
@@ -66,32 +53,36 @@ const SettingsPage = () => {
                         <BackArrow />
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
-                        <Text style={styles.signup}>Settings</Text>
+                        <Text style={styles.signup}>Help</Text>
                     </View>
                 </View>
 
                 <Card style={styles.card}>
                     <View style={styles.container}>
-                        {settings.map((item, index) => {
-                            return (
-                                <TouchableOpacity key={index} style={styles.rowBox} onPress={item.onPress}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 20 }}>
-                                        <View style={{ justifyContent: 'center', alignItems: 'center', width: 25, height: 35, }}>
-                                            {item.icon}
-                                        </View>
-                                        <Text style={styles.label}>{item.title}</Text>
+                        <Text style={styles.topText}>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pellentesque congue lorem, vel tincidunt tortor.
+                        </Text>
+                        {
+                            helpMethods.map((method, index) => {
+                                return (
+                                    <View key={index}>
+                                        <TouchableOpacity  style={styles.rowBox} onPress={method.path}>
+                                            <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                                                <Text style={styles.label}>{method.title}</Text>
+                                                <Text style={styles.description}>{method.description}</Text>
+                                            </View>
+                                            <TouchableOpacity style={styles.downArrow}>
+                                                <BackArrow />
+                                            </TouchableOpacity>
+                                        </TouchableOpacity>
                                     </View>
-                                    <TouchableOpacity style={styles.downArrow}>
-                                        <BackArrow />
-                                    </TouchableOpacity>
-                                </TouchableOpacity>
-                            )
-                        })}
+                                )
+                            })
+                        }
                     </View>
                 </Card>
             </View>
         </ScrollView>
-
     </>
     )
 };
@@ -107,8 +98,7 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'center',
-            columnGap: 90,
-            marginTop: 20
+            columnGap: 110
         }
         ,
         signup: {
@@ -122,69 +112,44 @@ const styles = StyleSheet.create(
             width: width,
             height: "100%",
             alignSelf: 'center',
-            marginTop: 20,
+            marginTop: 50,
             paddingBottom: 60,
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
             paddingHorizontal: 30,
-            paddingVertical: 20,
+            paddingVertical: 25,
             backgroundColor: '#F5F5F5',
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },
             shadowOpacity: 0.8,
             shadowRadius: 2,
             elevation: 5,
-        }
-        ,
+            alignItems: 'center'
+        },
         container: {
-            paddingTop: 15,
+            paddingTop: 5,
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
             rowGap: 15,
-            paddingBottom: 80,
-            width: "100%"
         },
-        description: {
+        topText: {
+            fontFamily: 'LeagueSpartanLight',
             fontSize: 14,
-            fontFamily: "LeagueSpartanLight"
-        },
-        loginButtonUpper: {
-            backgroundColor: '#FFDECF',
-            borderRadius: 20,
-            width: 150,
-            height: 28,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        loginButtonActive: {
-            backgroundColor: '#E95322',
-            borderRadius: 20,
-            width: 155,
-            height: 28,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        loginButtonText: {
-            fontSize: 17,
-            fontFamily: 'LeagueSpartanRegular',
-            width: "100%",
-            height: 20,
-            color: '#E95322'
-        },
-        loginButtonTextActive: {
-            fontSize: 17,
-            fontFamily: 'LeagueSpartanRegular',
-            width: "100%",
-            height: 20,
+            borderBottomWidth: 1,
+            borderColor: '#FFD8C7',
+            paddingBottom: 20,
 
         },
         rowBox: {
             flexDirection: 'row',
             justifyContent: 'space-between',
-            alignItems: 'stretch',
+            alignItems: 'center',
             paddingLeft: 5,
             width: 323,
+            borderBottomWidth: 1,
+            borderColor: '#FFD8C7',
+            paddingBottom: 20
 
         },
         label: {
@@ -192,11 +157,15 @@ const styles = StyleSheet.create(
             fontFamily: 'LeagueSpartanMedium',
             fontSize: 20,
         },
-        downArrow: {
-            transform: [{ rotate: '-90deg' }]
+        description: {
+            fontFamily: 'LeagueSpartanLight',
+            fontSize: 14,
+            color: "#391713"
         },
-
+        downArrow: {
+            transform: [{ rotate: '180deg' }]
+        },
     }
 )
 
-export default SettingsPage;
+export default HelpPage;

@@ -43,13 +43,13 @@ const PaymentMethodsPage = () => {
         {
             id: 3,
             title: "Paypal",
-            icon: <PaypalIcon  width={31} height={39}/>,
+            icon: <PaypalIcon width={31} height={39} />,
             checked: false
         },
         {
             id: 4,
             title: "Google-Pay",
-            icon: <GooglePlayIcon width={32} height={39}/>,
+            icon: <GooglePlayIcon width={32} height={39} />,
             checked: false
         }
     ]);
@@ -83,15 +83,15 @@ const PaymentMethodsPage = () => {
                 <Card style={styles.card}>
 
                     <View style={styles.container}>
-                        {payMethods.map(method => {
+                        {payMethods.map((method, index) => {
                             return (
-                                <>
+                                <View key={index}>
                                     <View style={styles.rowBox} >
                                         <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 20 }}>
                                             {method.icon}
-                                            
-                                                <Text style={styles.label}>{method.title}</Text>
-                                           
+
+                                            <Text style={styles.label}>{method.title}</Text>
+
                                         </View>
                                         <TouchableOpacity
                                             onPress={() => handleCheckboxPress(method.id)}
@@ -110,8 +110,8 @@ const PaymentMethodsPage = () => {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{ width: "100%", borderTopWidth: 1, borderTopColor: '#FFD8C7' }}></View>
-                                    </>
-                                    
+                                </View>
+
                             )
                         })}
 

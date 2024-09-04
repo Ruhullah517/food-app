@@ -21,7 +21,7 @@ const ContactUsSection = () => {
 
     });
 
-    const payMethods= [
+    const payMethods = [
         {
             id: 1,
             title: "Customer Service",
@@ -59,21 +59,21 @@ const ContactUsSection = () => {
     }
 
     return (<>
-        {payMethods.map(method => {
+        {payMethods.map((method, index) => {
             return (
-                <>
-                    <View style={styles.rowBox} >
-                        <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 20 }}>
-                            {method.icon}
 
-                            <Text style={styles.label}>{method.title}</Text>
+                <View key={index} style={styles.rowBox} >
+                    <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 20 }}>
+                        {method.icon}
 
-                        </View>
-                        <TouchableOpacity style={styles.downArrow}>
-                            <BackArrow />
-                        </TouchableOpacity>
+                        <Text style={styles.label}>{method.title}</Text>
+
                     </View>
-                </>
+                    <TouchableOpacity style={styles.downArrow}>
+                        <BackArrow />
+                    </TouchableOpacity>
+                </View>
+
 
             )
         })}
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'stretch',
         paddingLeft: 5,
-        width:323,
+        width: 323,
 
     },
     label: {

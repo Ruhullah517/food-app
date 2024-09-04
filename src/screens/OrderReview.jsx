@@ -61,7 +61,7 @@ const LeaveReviewPage = ({ route, navigation }) => {
                         <Text style={styles.productName}>{order.name}</Text>
                         <Text style={styles.text}>We'd love to know what you think of your dish.</Text>
                         <View style={styles.ratingContainer}>
-                            <Rating rating={rating} setRating={setRating} />
+                            <Rating rating={rating} setRating={setRating} backgroundColor={"#F8F8F8"}/>
                         </View>
                         <Text style={styles.text}>Leave us your comment!</Text>
                         <TextInput

@@ -129,8 +129,8 @@ const FoodDetailPage = ({ route }) => {
                         </View>
                         <View>
                             <Text style={{ fontFamily: "LeagueSpartanMedium", fontSize: 20 }}>Toppings</Text>
-                            {toppings.map(item => (
-                                <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between', width: "100%", alignItems: 'center' }}>
+                            {toppings.map((item, index) => (
+                                <View key={index} style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between', width: "100%", alignItems: 'center' }}>
                                     <Text style={{ fontFamily: "LeagueSpartanLight" }}>{item.title}</Text>
                                     <Text style={{ fontFamily: "LeagueSpartanLight", color: "#FFD8C7" }}>------------------------------</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>

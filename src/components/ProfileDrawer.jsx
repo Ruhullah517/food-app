@@ -62,7 +62,7 @@ export default function CustomDrawerContent(props) {
         </View>
       </View>
       <View style={styles.drawerItems}>
-        {drawerItems.map((item, index) => (<>
+        {drawerItems.map((item, index) => (<View key={index}>
           <DrawerItem
             key={index}
             label={item.label}
@@ -71,7 +71,7 @@ export default function CustomDrawerContent(props) {
             icon={() => <View style={styles.iconBack}>{item.icon}</View>}
           />
           {index < drawerItems.length - 1 ? < View style={{ width: "75%", backgroundColor: '#FFD8C7', height: 1, marginLeft: 20 }}></View > : null
-          }</>
+          }</View>
         ))}
       </View>
     </DrawerContentScrollView >

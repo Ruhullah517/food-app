@@ -53,10 +53,11 @@ const TrackOrder = ({ route }) => {
                             </View>
                         </View>
                         <View style={styles.mapCard}>
-                            {/* <View style={{ width: 322, height: 191, backgroundColor: "#F5CB58", borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={{ width: 322, height: 170, backgroundColor: "#F5CB58", borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={{ fontFamily: "LeagueSpartanMedium" }}>Map</Text>
-                            </View> */}
-                            <Map width={323} height={170}/>
+                               
+                            </View>
+                            {/* <Map width={323} height={170}/> */}
                             <View style={styles.deliveryTimeContainer}>
                                 <Text style={styles.deliveryTimeTitle}>Delivery Time</Text>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>

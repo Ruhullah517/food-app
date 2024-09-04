@@ -38,11 +38,11 @@ const LiveTrack = () => {
                 </View>
 
                 <Card style={styles.card}>
-                    {/* <View style={{ width: 323, height: 400, backgroundColor: "#E95322", justifyContent: 'center', alignItems: 'center', borderRadius:20 }}>
+                    <View style={{ width: 323, height: 400, backgroundColor: "#F5CB58", justifyContent: 'center', alignItems: 'center', borderRadius:20 }}>
                         <Text style={{fontSize:30, color:'#fff'}}>Map</Text>
-                    </View> */}
+                    </View>
                     <View style={{ position: 'relative' }}>
-                        <Map width={323} height={400} />
+                        {/* <Map width={323} height={400} /> */}
                         <View style={styles.buttonsContainer}>
                             <View style={styles.button}>
                                 <Text style={styles.buttonText}>Call the delivery boy</Text>

@@ -76,9 +76,9 @@ const DeliveryAddressPage = () => {
                 <Card style={styles.card}>
 
                     <View style={styles.container}>
-                        {addresses.map(address => {
+                        {addresses.map((address, index) => {
                             return (
-                                <>
+                                <View key={index}>
                                     <View style={{ width: "100%", borderTopWidth: 1, borderTopColor: '#FFD8C7' }}></View>
                                     <View style={styles.rowBox} >
                                         <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: 10 }}>
@@ -104,7 +104,8 @@ const DeliveryAddressPage = () => {
                                             />
                                         </TouchableOpacity>
 
-                                    </View></>
+                                    </View>
+                                </View>
                             )
                         })}
 
