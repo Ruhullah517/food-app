@@ -2,10 +2,13 @@ import { useFonts } from 'expo-font';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Modal, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
 import { Button } from 'react-native-paper';
+import * as SecureStore from 'expo-secure-store';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
 const LogoutModal = ({ modalVisible, setModalVisible }) => {
+    const navigation = useNavigation();
 
     const [loaded] = useFonts({
         LeagueSpartanMedium: require('../../assets/fonts/League Spartan Medium.ttf'),
@@ -17,11 +20,16 @@ const LogoutModal = ({ modalVisible, setModalVisible }) => {
 
     })
 
-    const handleLogout = () => {
-        // Perform logout logic here
-        console.log('Logged out');
-        setModalVisible(false); // Close the modal after logout
-
+    const handleLogout = async () => {
+        try {
+            
+            await SecureStore.deleteItemAsync('authToken');
+            console.log("Token deleted successfully");
+           
+            navigation.navigate('Login');
+        } catch (error) {
+            console.log("Error during logout:", error);
+        }
     };
 
     if (!loaded) {

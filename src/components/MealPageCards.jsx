@@ -174,9 +174,11 @@ const styles = StyleSheet.create({
         marginVertical: 20,
         flexDirection: 'column',
         alignItems: 'flex-start',
+        width: 323,
+
     },
     mealsImage: {
-        width: 323,
+        width: "100%",
         height: 174,
         borderRadius: 36,
     },

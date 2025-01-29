@@ -255,7 +255,6 @@ const HomePage = () => {
                             ))}
                         </View>
                     </View>
-
                 </Card>
             </View>
         </ScrollView>
